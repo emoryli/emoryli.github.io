@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Emory Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    #banner {
+      height: 200px;
+      background-color: #f0ead2;
+      padding: 20px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    #nav {
+      float: left;
+      width: 25%;
+      height: 500px;
+      background-color: #faedcd;
+      padding: 15px;
+    }
+
+    /* ⭐ 中間欄：平滑滑動 + 頂端吸附 ⭐ */
+    #content {
+      float: left;
+      width: 50%;
+      height: 500px;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory; /* 啟用捲動對齊機制 */
+      background-color: #fefae0;
+      padding: 20px 25px;
+    }
+
+    #supporting {
+      float: left;
+      width: 25%;
+      height: 500px;
+      background-color: #e9edc9;
+      padding: 15px;
+    }
+
+    #footer {
+      clear: both;
+      height: 50px;
+      background-color: #ccd5ae;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+
+    #nav ul {
+      list-style-type: none;
+    }
+
+    #nav ul li {
+      margin-bottom: 12px;
+    }
+
+    #nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    #nav ul li a:hover {
+      text-decoration: underline;
+      color: #606c38;
+    }
+
+    /* ⭐ 不用硬撐 500px，但依然靠頂部對齊 ⭐ */
+    #content section {
+      scroll-snap-align: start; /* 頂部對齊 */
+      min-height: 250px;        /* 縮短高度，減少多餘空白 */
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px dashed #d4c5a9;
+    }
+
+    #content section:last-child {
+      border-bottom: none;
+      min-height: 500px; /* 提示：最後一項建議保留足夠高度，否則捲軸到底時會因無空間往下捲而無法完全頂到最上面 */
+    }
+
+    #content h1 {
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="banner">
+    <h1>Emory Li</h1>
+  </div>
+
+  <div id="nav">
+    <ul>
+      <li><a href="#scene01">學歷</a></li>
+      <li><a href="#scene02">研究興趣</a></li>
+      <li><a href="#scene03">小組成員</a></li>
+      <li><a href="#scene04">網站成果</a></li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <section id="scene01">
+      <h1>學歷</h1>
+      <p>臺灣大學新聞研究所｜就讀中</p>
+    </section>
+    
+    <section id="scene02">
+      <h1>研究興趣</h1>
+      <p>體育、勞工、藝文產業、災害</p>
+    </section>
+    
+    <section id="scene03">
+      <h1>小組成員</h1>
+      <p>1. Emory Li</p>
+    </section>
+    
+    <section id="scene04">
+      <h1>網站成果</h1>
+      <p>個人網頁</p>
+    </section>
+  </div>
+
+  <div id="supporting">
+    <h1>Extra Information</h1>
+    <p>hi hi hi</p>
+  </div>
+
+  <div id="footer">
+    <h1>Here is footer</h1>
+  </div>
+
+</body>
+</html>
