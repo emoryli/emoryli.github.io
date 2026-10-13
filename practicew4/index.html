@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁版面設計</title>
+    <style>
+        /* 基礎重設與平滑滾動 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            background-color: #f0f0f0; /* 背景襯底灰色，凸顯置中的800px容器 */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 整個頁面寬度 800px 置中容器 */
+        .page-wrapper {
+            width: 800px;
+            position: relative;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. 上方標題橫幅 (Banner) */
+        header.banner {
+            position: fixed;
+            top: 0;
+            width: 800px;
+            height: 100px;
+            background-color: rgba(248, 248, 230, 0.85); /* #f8f8e6 半透明 */
+            backdrop-filter: blur(4px);                  /* 毛玻璃效果加強半透明質感 */
+            color: #000000;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            z-index: 1000;                               /* 保證在最上層，主文會跑在其後方 */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* 內容主要區域容器：排版左中右 (100px + 600px + 100px = 800px) */
+        .content-container {
+            display: flex;
+            width: 800px;
+            margin-top: 100px; /* 避開頂端 100px 高度的 fixed banner */
+            min-height: calc(100vh - 150px);
+        }
+
+        /* 2. 左側頁面導覽 (Navigator) 寬100px */
+        nav.navigator {
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        /* 導覽按鈕區塊固定在畫面上方，不隨滾動滑走 */
+        .nav-fixed-list {
+            position: fixed;
+            top: 120px; /* 位於 Banner(100px) 下方 20px 處 */
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 500;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            background-color: #d3d3d3;
+            color: #000000;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        /* 游標移上去變成 #ffbfcb 色 */
+        .nav-item:hover {
+            background-color: #ffbfcb;
+        }
+
+        /* 3. 中間主文 (MainText) 寬600px 底色白 */
+        main.main-text {
+            width: 600px;
+            background-color: #ffffff;
+            font-size: 20px;
+            color: #000000;
+            padding: 20px;
+            flex-shrink: 0;
+            border-left: 1px solid #eee;
+            border-right: 1px solid #eee;
+        }
+
+        .scene-section {
+            /* 關鍵設定：避免錨點跳轉時標題被 100px 高度的 banner 遮擋 */
+            scroll-margin-top: 110px;
+            padding-bottom: 100px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .scene-section:last-child {
+            border-bottom: none;
+            padding-bottom: 300px; /* 預留底部滾動空間，確保 Scene04 也能精準頂到 Banner 下方 */
+        }
+
+        .scene-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333333;
+        }
+
+        .scene-content {
+            line-height: 1.6;
+            color: #555555;
+        }
+
+        /* 5. 右側文字區塊 (Supporting information) 寬100px 高150px */
+        aside.supporting-info {
+            width: 100px;
+            height: 150px;
+            background-color: #ffbfcb;
+            font-size: 16px;
+            color: #000000;
+            padding: 10px 5px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 10px;
+            /* 隨頁面正常滾動，滾動時會向上進入 banner 後方並消失 */
+        }
+
+        /* 4. 下方頁腳 (Footer) 寬800px 高50px 底色#808080 */
+        footer.footer {
+            width: 800px;
+            height: 50px;
+            background-color: #808080;
+            font-size: 16px;
+            color: #ffffff;
+            padding: 8px 12px;
+            text-align: left; /* 文字顯示在左上方 */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頁面 800px 置中容器 -->
+    <div class="page-wrapper">
+
+        <!-- 1. 上方標題橫幅 (Banner) -->
+        <header class="banner">
+            Here is Banner
+        </header>
+
+        <!-- 內容區域（含左側導覽、中間主文、右側資訊） -->
+        <div class="content-container">
+
+            <!-- 2. 左側頁面導覽 (Navigator) -->
+            <nav class="navigator">
+                <div class="nav-fixed-list">
+                    <a href="#scene01" class="nav-item">Scene01</a>
+                    <a href="#scene02" class="nav-item">Scene02</a>
+                    <a href="#scene03" class="nav-item">Scene03</a>
+                    <a href="#scene04" class="nav-item">Scene04</a>
+                </div>
+            </nav>
+
+            <!-- 3. 中間主文 (MainText) -->
+            <main class="main-text">
+                <section id="scene01" class="scene-section">
+                    <div class="scene-title">Scene01</div>
+                    <div class="scene-content">
+                        這是 Scene01 的主文內容。當您在左側點選 Scene01 時，頁面會平滑滑動至此，此標題會精準出現在 Banner 下方。向下滾動時，本段文字會向上沒入半透明 Banner 後方。
+                    </div>
+                </section>
+
+                <section id="scene02" class="scene-section">
+                    <div class="scene-title">Scene02</div>
+                    <div class="scene-content">
+                        這是 Scene02 的主文內容。主文寬度設定為 600px，背景為純白色，字元大小為 20px。此處內容可以自由擴充與排版。
+                    </div>
+                </section>
+
+                <section id="scene03" class="scene-section">
+                    <div class="scene-title">Scene03</div>
+                    <div class="scene-content">
+                        這是 Scene03 的主文內容。左側導覽列固定在視窗中，不會隨著滾輪滾動而消失。
+                    </div>
+                </section>
+
+                <section id="scene04" class="scene-section">
+                    <div class="scene-title">Scene04</div>
+                    <div class="scene-content">
+                        這是 Scene04 的主文內容。已設定足夠的底部間距，確保點選 Scene04 時也能準確捲動至 Banner 下方。
+                    </div>
+                </section>
+            </main>
+
+            <!-- 5. 右側文字區塊 (Supporting information) -->
+            <aside class="supporting-info">
+                Information
+            </aside>
+
+        </div>
+
+        <!-- 4. 下方頁腳 (Footer) -->
+        <footer class="footer">
+            Here is footer
+        </footer>
+
+    </div>
+
+</body>
+</html>
