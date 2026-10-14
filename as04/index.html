@@ -1,0 +1,1378 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>揭開「CP值最高」公務員的幻象｜監所管理員專題</title>
+  <meta name="description" content="走進臺灣監所，看見監所管理員的工作環境、輪班生活、人力不足與勞動權益困境。">
+
+  <style>
+    :root {
+      --bg: #f2f0eb;
+      --paper: #faf9f6;
+      --ink: #252525;
+      --muted: #77746f;
+      --line: #d8d4cc;
+      --dark: #191919;
+      --accent: #a64b3c;
+      --content: 720px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.9;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.45;
+    }
+
+    p {
+      margin-bottom: 1.6em;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* 閱讀進度條 */
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: var(--accent);
+      z-index: 100;
+    }
+
+    /* 封面 */
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      color: white;
+      overflow: hidden;
+      background: #222;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) brightness(.48);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        transparent 10%,
+        rgba(0,0,0,.85) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding-bottom: 12vh;
+    }
+
+    .eyebrow {
+      font-size: .78rem;
+      letter-spacing: .24em;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5.4rem);
+      max-width: 1050px;
+      letter-spacing: -.035em;
+      margin-bottom: 25px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: #e2e0dc;
+    }
+
+    .byline {
+      font-size: .85rem;
+      color: #bbb;
+      margin-top: 35px;
+    }
+
+    .scroll-hint {
+      margin-top: 55px;
+      font-size: .75rem;
+      letter-spacing: .2em;
+      animation: float 2s infinite;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(9px); }
+    }
+
+    /* 一般文章 */
+
+    .article {
+      max-width: var(--content);
+      margin: auto;
+      padding: 100px 25px;
+      font-size: 1.08rem;
+    }
+
+    .article h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 35px;
+    }
+
+    .article h3 {
+      font-size: 1.4rem;
+      margin: 55px 0 22px;
+    }
+
+    .lead {
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.85;
+    }
+
+    .chapter-label {
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      margin-bottom: 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    /* 大字引言 */
+
+    .quote-section {
+      background: var(--dark);
+      color: white;
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 25px;
+      text-align: center;
+    }
+
+    .quote-inner {
+      max-width: 950px;
+    }
+
+    .quote-section blockquote {
+      font-size: clamp(1.9rem, 4vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .quote-section cite {
+      display: block;
+      margin-top: 35px;
+      color: #aaa;
+      font-size: .9rem;
+      font-style: normal;
+    }
+
+    /* 固定圖片 + 捲動文字 */
+
+    .scrolly {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      background: #e8e6e1;
+    }
+
+    .scrolly-visual {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #292929;
+    }
+
+    .scrolly-visual img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      opacity: 0;
+      transition: opacity .7s ease;
+      filter: grayscale(100%);
+    }
+
+    .scrolly-visual img.active {
+      opacity: 1;
+    }
+
+    .visual-caption {
+      position: absolute;
+      z-index: 3;
+      bottom: 25px;
+      left: 25px;
+      right: 25px;
+      color: white;
+      font-size: .78rem;
+      text-shadow: 0 1px 8px black;
+    }
+
+    .scrolly-text {
+      padding: 15vh 9%;
+    }
+
+    .story-step {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 500px;
+      margin: auto;
+      opacity: .38;
+      transition: opacity .5s;
+    }
+
+    .story-step.active {
+      opacity: 1;
+    }
+
+    .story-step h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    .story-step p {
+      font-size: 1.05rem;
+    }
+
+    /* 全幅圖片 */
+
+    .full-image {
+      position: relative;
+      height: 90vh;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .full-image img {
+      height: 100%;
+      filter: grayscale(100%);
+    }
+
+    .full-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        transparent 35%,
+        rgba(0,0,0,.8)
+      );
+    }
+
+    .full-image-content {
+      position: absolute;
+      bottom: 8%;
+      left: 8%;
+      right: 8%;
+      color: white;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .full-image-content h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+    }
+
+    /* 左右交錯圖文 */
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 75vh;
+      background: var(--paper);
+    }
+
+    .split.reverse .split-image {
+      order: 2;
+    }
+
+    .split-image {
+      min-height: 500px;
+    }
+
+    .split-image img {
+      height: 100%;
+      filter: grayscale(100%);
+    }
+
+    .split-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(35px, 7vw, 110px);
+    }
+
+    .split-content h2 {
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+    }
+
+    /* 數據區 */
+
+    .data-section {
+      padding: 110px 25px;
+      background: #e7e4dd;
+    }
+
+    .data-container {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .data-section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .data-intro {
+      max-width: 720px;
+      margin-bottom: 65px;
+    }
+
+    .chart-card {
+      background: var(--paper);
+      padding: clamp(25px, 5vw, 60px);
+      margin: 35px 0;
+      border: 1px solid var(--line);
+    }
+
+    .chart-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .chart-note {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 90px;
+      gap: 20px;
+      align-items: center;
+      margin: 22px 0;
+    }
+
+    .bar-track {
+      height: 24px;
+      background: #e6e2db;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #424242;
+      width: 0;
+      transition: width 1.4s ease;
+    }
+
+    .bar-fill.accent {
+      background: var(--accent);
+    }
+
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .big-number {
+      font-size: clamp(3.8rem, 9vw, 7rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.05em;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .stat {
+      padding: 35px;
+      background: white;
+    }
+
+    .stat-label {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    /* 24小時輪班示意 */
+
+    .timeline {
+      display: flex;
+      height: 65px;
+      overflow: hidden;
+      margin: 35px 0 15px;
+    }
+
+    .timeline div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      text-align: center;
+      border-right: 2px solid white;
+      color: white;
+    }
+
+    .timeline .duty {
+      background: #393939;
+    }
+
+    .timeline .rest {
+      background: #99958d;
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* 比較圖 */
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-top: 35px;
+    }
+
+    .comparison-item {
+      padding: 35px;
+      background: #f0ede7;
+    }
+
+    .comparison-item strong {
+      display: block;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.3;
+      margin: 15px 0;
+    }
+
+    /* 結尾 */
+
+    .ending {
+      background: var(--dark);
+      color: white;
+      padding: 130px 25px;
+    }
+
+    .ending-inner {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .ending h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 45px 25px;
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    /* 捲動淡入 */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 手機版 */
+
+    @media (max-width: 800px) {
+      .scrolly {
+        display: block;
+      }
+
+      .scrolly-visual {
+        height: 48vh;
+        z-index: 5;
+      }
+
+      .scrolly-text {
+        padding: 0 7%;
+      }
+
+      .story-step {
+        min-height: 70vh;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .split.reverse .split-image {
+        order: 0;
+      }
+
+      .split-image {
+        min-height: 0;
+        height: 45vh;
+      }
+
+      .split-content {
+        padding: 55px 25px;
+      }
+
+      .stat-grid,
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 65px 1fr 70px;
+        gap: 10px;
+        font-size: .85rem;
+      }
+
+      .article {
+        padding: 75px 24px;
+      }
+
+      .full-image {
+        height: 70vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .bar-fill, .story-step,
+      .scrolly-visual img {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- 封面 -->
+
+<header class="hero">
+  <img class="hero-image"
+       src="images/監所敘事_01.png"
+       alt="監所管理員走入層層鐵門的素描示意">
+
+  <div class="hero-content">
+    <div class="eyebrow">深度報導｜監所勞動現場</div>
+
+    <h1>揭開「CP值最高」公務員的幻象</h1>
+
+    <div class="hero-subtitle">
+      窺見監所管理員一人面對700名受刑人的高壓工作
+    </div>
+
+    <div class="byline">
+      記者｜李翊瑄、郭品妤、葉蓁芸、蔡愷恆
+    </div>
+
+    <div class="scroll-hint">向下捲動，走進監所 ↓</div>
+  </div>
+</header>
+
+<!-- 前言 -->
+
+<section class="article">
+  <div class="chapter-label">PROLOGUE｜高薪的幻象</div>
+
+  <p class="lead reveal">
+    「CP值最高公務員」、「工作內容超輕鬆，畢業就有5萬起薪！」
+  </p>
+
+  <p class="reveal">
+    國考補習班的宣傳文案，形塑了監所管理員資格取得不難、
+    輕鬆又高薪的模樣。
+  </p>
+
+  <p class="reveal">
+    事實上，越來越少人想要投入這份工作。
+    根據《公職網》數據，
+    監所管理員國考一試到考人數從民國108年的2,552人，
+    降至民國113年的1,147人。
+    短短五年間，到考人數少了一半以上。
+  </p>
+
+  <p class="reveal">
+    一個人要管理700名受刑人的生活，
+    充滿菸味和壓迫感的空間，再加上長工時與間歇性睡眠，
+    才是部分監所管理員真實面對的工作日常。
+  </p>
+</section>
+
+<!-- 第一個引言 -->
+
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <blockquote>
+      「監所管理員也是被關起來的人。」
+    </blockquote>
+    <cite>——監所關注小組辦公室主任 王奕蘋</cite>
+  </div>
+</section>
+
+<!-- 第一章：固定圖片滾動敘事 -->
+
+<section class="scrolly" id="prison-space">
+
+  <div class="scrolly-visual">
+    <img src="images/監所敘事_01.png"
+         class="active" data-image="0"
+         alt="監所入口">
+
+    <img src="images/監所敘事_02.png"
+         data-image="1"
+         alt="監所走廊">
+
+    <img src="images/監所敘事_03.png"
+         data-image="2"
+         alt="舍房衛浴空間">
+
+    <img src="images/監所敘事_04.png"
+         data-image="3"
+         alt="舍房外的管理員">
+
+    <div class="visual-caption">
+      根據報導文字繪製之情境示意，非實際監所攝影
+    </div>
+  </div>
+
+  <div class="scrolly-text">
+
+    <div class="story-step active" data-step="0">
+      <div class="chapter-label">CHAPTER 01｜進入監所</div>
+      <h2>三道鐵門之後</h2>
+      <p>
+        進入臺北監獄，會先通過獄內的行政大樓，
+        穿過長廊，分別通過三道電子鎖鐵門。
+      </p>
+      <p>
+        不得帶入任何電子設備，
+        才能進到受刑人生活區，
+        也是監所管理員的主要工作環境——舍房與工場。
+      </p>
+    </div>
+
+    <div class="story-step" data-step="1">
+      <h2>明亮白牆背後的壓迫感</h2>
+      <p>
+        建築物內是重新粉刷過的淨白牆壁，
+        看似明亮開闊。
+      </p>
+      <p>
+        但消散不去的菸味、扣上鐵門的重響、
+        交錯簇擁的層層柱子，
+        以及抬頭隨處可見的監視器，
+        構成了管理員的日常工作環境。
+      </p>
+    </div>
+
+    <div class="story-step" data-step="2">
+      <h2>沒有真正隔開的衛浴空間</h2>
+      <p>
+        舍房內的廁所與浴室並不是封閉空間。
+        離地面約兩公尺高的地方，
+        有一對約半版報紙大小的對外窗。
+      </p>
+      <p>
+        衛浴空間與床位之間，
+        只有遮住下半身的矮牆，
+        難以迴避排遺與排泄的氣味。
+      </p>
+      <p>
+        舍房外的監所管理員，
+        只能和受刑人一起承受難聞的氣味。
+      </p>
+    </div>
+
+    <div class="story-step" data-step="3">
+      <h2>酷熱與菸味無處可逃</h2>
+      <p>
+        到了夏天，舍房內的氣溫
+        會比外頭至少高兩度。
+      </p>
+      <p>
+        氣味隨著溫度交織，
+        停留在酷熱的七月正午。
+        監所管理員必須持續待在這樣的環境裡工作。
+      </p>
+      <p>
+        在北部看守所擔任管理員的子嘉（化名）直言：
+        「環境超糟的！」
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 工場 -->
+
+<section class="full-image">
+  <img src="images/監所敘事_05.png"
+       alt="管理員監視工場的示意圖">
+
+  <div class="full-image-content">
+    <div class="chapter-label">CHAPTER 02｜工作日常</div>
+    <h2>他們的工作，離不開受刑人</h2>
+    <p>
+      提帶接見、戒護、監視受刑人、維持獄內安全。
+      每一天，都必須保持警戒。
+    </p>
+  </div>
+</section>
+
+<section class="article">
+  <h2 class="reveal">看守，也是一種高度細緻的工作</h2>
+
+  <p class="reveal">
+    當監獄內部發生爭執或扭打，
+    管理員必須介入協調。
+    管理員吐司（化名）表示，
+    他任職十年間幾乎沒有遇過這類狀況，
+    但曾在兩、三年前遇到受刑人在工場內躁動。
+  </p>
+
+  <p class="reveal">
+    有些藥物或酒精成癮的受刑人，
+    可能因戒斷症狀而情緒失控，
+    甚至毆打巡防管理員。
+  </p>
+
+  <p class="reveal">
+    王奕蘋觀察，管理員也必須拿捏與受刑人的相處界線，
+    包括協調舍房床位、觀察受刑人之間的關係。
+    這些工作不只是維持秩序，
+    更需要細緻的判斷與溝通。
+  </p>
+</section>
+
+<!-- 夜勤 -->
+
+<section class="split">
+  <div class="split-image">
+    <img src="images/監所敘事_06.png"
+         alt="夜勤管理員休息的示意圖">
+  </div>
+
+  <div class="split-content">
+    <div class="chapter-label">CHAPTER 03｜分段睡眠</div>
+    <h2>睡著，又突然驚醒</h2>
+
+    <p>
+      夜勤管理員從上午八點上班，
+      直到隔日上午八點交班。
+    </p>
+
+    <p>
+      期間雖有四至五次休息，
+      每次約一個半小時至三小時，
+      但休息時間被切割得零碎。
+    </p>
+
+    <p>
+      即使在備勤休息時間，
+      遇到緊急狀況仍必須第一時間協助戒護。
+    </p>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <blockquote>
+      「有時候會睡著睡著突然驚醒，
+      <br>忘記自己到底在哪裡。」
+    </blockquote>
+    <cite>——監所管理員 宥林（化名）</cite>
+  </div>
+</section>
+
+<section class="data-section">
+  <div class="data-container">
+
+    <div class="chapter-label">24-HOUR SHIFT｜輪班生活</div>
+    <h2>24小時的勤務，睡眠被切成數段</h2>
+
+    <p class="data-intro">
+      依據受訪管理員描述，夜勤採24小時勤務，中間安排多次休息。<br>下方為「勤務與休息交替」的概念示意，並非任何特定監所的實際排班表。
+    </p>
+
+    <div class="chart-card reveal">
+      <div class="chart-title">夜勤24小時｜概念示意</div>
+
+      <div class="timeline">
+        <div class="duty" style="flex:3">勤務</div>
+        <div class="rest" style="flex:1.5">休息</div>
+        <div class="duty" style="flex:3">勤務</div>
+        <div class="rest" style="flex:2">休息</div>
+        <div class="duty" style="flex:3">勤務</div>
+        <div class="rest" style="flex:2">休息</div>
+        <div class="duty" style="flex:3">勤務</div>
+        <div class="rest" style="flex:2">休息</div>
+        <div class="duty" style="flex:4.5">勤務</div>
+      </div>
+
+      <div class="timeline-labels">
+        <span>當日上午 08:00</span>
+        <span>隔日上午 08:00</span>
+      </div>
+
+      <p class="chart-note">
+        示意圖僅呈現分段休息的形式；
+        色塊長度不是實際時段或精確休息時數。
+      </p>
+    </div>
+
+    <p>
+      管理員亮亮（化名）坦言，
+      即使休假，生理狀態仍像上班一樣，
+      會在凌晨兩點、五點醒來。
+    </p>
+
+  </div>
+</section>
+
+<section class="article">
+  <h2>下班了，身體卻還在值勤</h2>
+
+  <p>
+    長期分段睡眠，使管理員難以建立穩定作息。
+    工作中的高度警戒，也不容易在下班後立即消失。
+  </p>
+
+  <p>
+    除了身體疲勞，受刑人的情緒壓力
+    也經常落在管理員身上。
+  </p>
+
+  <p>
+    亮亮直言：「我們就是他（受刑人）
+    唯一可以抒發情緒的出口，
+    那對我們的身心狀況是比較壓迫的。」
+  </p>
+
+  <p>
+    宥林更曾不只一次遇到受刑人在舍房內自殺，
+    他感慨：「如果可以選擇的話，
+    我希望不要再做這種負擔人命的工作。」
+  </p>
+</section>
+
+<!-- 外醫 -->
+
+<section class="split reverse">
+  <div class="split-image">
+    <img src="images/監所敘事_07.png"
+         alt="戒護外醫勤務示意">
+  </div>
+
+  <div class="split-content">
+    <div class="chapter-label">CHAPTER 04｜額外勤務</div>
+    <h2>有人外醫，留下的人就得做更多</h2>
+
+    <p>
+      2013年二代健保將受刑人納入保險對象後，
+      受刑人的醫療權利更受到重視。
+    </p>
+
+    <p>
+      然而在戒護人力沒有相應增加的情況下，
+      外醫勤務成為基層管理員額外的工作壓力。
+    </p>
+
+    <p>
+      亮亮指出，遇到緊急外醫，
+      其他管理員可能必須承擔
+      原本1.2至1.5倍的工作量。
+    </p>
+  </div>
+</section>
+
+<!-- 人力數據 -->
+
+<section class="data-section">
+  <div class="data-container">
+
+    <div class="chapter-label">CHAPTER 05｜人力危機</div>
+    <h2>當越來越少人願意進入監所</h2>
+
+    <p class="data-intro">
+      在長期人力不足的情況下，
+      監所管理員的報考人數持續下降。
+      缺額增加，並不代表工作變得更輕鬆。
+    </p>
+
+    <div class="chart-card reveal">
+      <div class="chart-title">
+        監所管理員國考一試到考人數
+      </div>
+
+      <div class="bar-row">
+        <span>2019年</span>
+        <div class="bar-track">
+          <div class="bar-fill" data-width="100%"></div>
+        </div>
+        <span class="bar-value">2,552</span>
+      </div>
+
+      <div class="bar-row">
+        <span>2024年</span>
+        <div class="bar-track">
+          <div class="bar-fill accent" data-width="44.9%"></div>
+        </div>
+        <span class="bar-value">1,147</span>
+      </div>
+
+      <div class="big-number" style="color:var(--accent)">
+        -55.1%
+      </div>
+
+      <p>五年間，到考人數減少超過一半。</p>
+
+      <p class="chart-note">
+        資料來源：《公職網》統計。
+        兩年度比較，未呈現中間年度的變化。
+      </p>
+    </div>
+
+    <div class="chart-card reveal">
+      <div class="chart-title">一名管理員，面對近700名受刑人</div>
+
+      <div class="big-number">1：700</div>
+
+      <p>
+        宥林分享，在人力不足的情況下，
+        曾有一名管理員獨自管理整層樓、
+        面對將近700名受刑人的經驗。
+      </p>
+
+      <p class="chart-note">
+        注意：這是受訪者描述的特定勤務情況，
+        並非全國平均戒護比，也不代表每名管理員
+        同時直接管理700人。
+      </p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat reveal">
+        <div class="stat-label">2023年8月底全臺戒護人力</div>
+        <div class="big-number" style="font-size:3.2rem">6,706</div>
+        <p>人</p>
+      </div>
+
+      <div class="stat reveal">
+        <div class="stat-label">受刑人總數</div>
+        <div class="big-number" style="font-size:3.2rem">55,732</div>
+        <p>人</p>
+      </div>
+    </div>
+
+    <p class="chart-note">
+      資料來源：《關鍵評論網》統計。
+    </p>
+
+  </div>
+</section>
+
+<!-- 管理階層 -->
+
+<section class="split">
+  <div class="split-image">
+    <img src="images/監所敘事_08.png"
+         alt="監所管理員處理行政文書的示意圖">
+  </div>
+
+  <div class="split-content">
+    <div class="chapter-label">CHAPTER 06｜制度壓力</div>
+    <h2>夾在長官與受刑人之間</h2>
+
+    <p>
+      管理員不只要維持監所秩序，
+      還須服從主管和長官的要求。
+    </p>
+
+    <p>
+      反覆修改報告、考績與升遷壓力，
+      讓基層管理員即使有意見，
+      也不一定敢在會議上提出。
+    </p>
+
+    <p>
+      宥林曾因在監所內發聲，
+      使當年度考績獎金少了兩萬元。
+    </p>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <blockquote>
+      「不是每個人的狀況都允許這樣，
+      <br>我們不能要求每個人去做我們認為對的事。」
+    </blockquote>
+    <cite>——監所管理員 宥林（化名）</cite>
+  </div>
+</section>
+
+<!-- 工會制度 -->
+
+<section class="article">
+  <div class="chapter-label">CHAPTER 07｜發聲的門檻</div>
+
+  <h2>想爭取權益，卻沒有正式工會</h2>
+
+  <p>
+    監所管理員具有公務人員身分，
+    無法比照一般勞工成立工會。
+    報導指出，依《公務人員協會法》，
+    公務人員組成協會的門檻較一般工會嚴格。
+  </p>
+
+  <p>
+    2017年成立的「台灣獄政工作權益促進會」，
+    是社團法人性質，
+    只能透過倡議向上級爭取權益。
+  </p>
+
+  <p>
+    即使參與權益討論，
+    管理員也可能需要額外請假，
+    並擔心影響考績與升遷。
+  </p>
+
+  <p>
+    國立政治大學勞工研究所教授成之約指出，
+    政府機關存在絕對權力關係的意識形態和文化，
+    使公務員難以籌組工會。
+  </p>
+</section>
+
+<!-- 加班費 -->
+
+<section class="data-section">
+  <div class="data-container">
+
+    <div class="chapter-label">PAY GAP｜勞動待遇</div>
+    <h2>同樣加班四小時，報酬卻不同</h2>
+
+    <p class="data-intro">
+      根據報導舉例，以時薪200元、
+      休息日加班四小時計算，
+      一般勞工與監所管理員的加班費存在差異。
+    </p>
+
+    <div class="chart-card reveal">
+      <div class="comparison">
+
+        <div class="comparison-item">
+          一般勞工
+          <strong>1,200元</strong>
+          <div class="bar-track">
+            <div class="bar-fill" data-width="100%"></div>
+          </div>
+        </div>
+
+        <div class="comparison-item">
+          監所管理員
+          <strong style="color:var(--accent)">800元</strong>
+          <div class="bar-track">
+            <div class="bar-fill accent"
+                 data-width="66.7%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="chart-note">
+        依照一般案例製圖，
+        非所有加班情況的實際給付金額。
+      </p>
+    </div>
+
+    <p>
+      獄政工會主張，
+      監所管理員夜間在高風險環境工作，
+      應獲得深夜危勞勤務津貼，
+      加班費加乘機制也應比照一般勞工。
+    </p>
+
+  </div>
+</section>
+
+<!-- 倡議 -->
+
+<section class="full-image">
+  <img src="images/監所敘事_09.png"
+       alt="基層公務人員團體爭取職業安全保障的示意圖">
+
+  <div class="full-image-content">
+    <div class="chapter-label">CHAPTER 08｜走出監所</div>
+    <h2>讓看不見的工作，被社會看見</h2>
+    <p>
+      「職業安全是人權，全面保障才周全。」
+    </p>
+  </div>
+</section>
+
+<section class="article">
+  <h2>在監所之外，爭取基本的工作保障</h2>
+
+  <p>
+    獄政工會與消防、警察等基層團體，
+    曾在立法院群賢樓外共同倡議，
+    呼籲公務人員的職業安全管理
+    應納入一般勞工職安法的保障。
+  </p>
+
+  <h3>二手菸與高溫</h3>
+
+  <p>
+    獄政工會要求改善室內抽風設施、
+    分流吸菸及非吸菸受刑人，
+    並建立空氣品質監測機制。
+  </p>
+
+  <h3>健康檢查與醫療福利</h3>
+
+  <p>
+    長期輪班與暴露在二手菸環境中，
+    管理員卻未必能獲得足夠的健康檢查與醫療保障。
+    工會因此主張積極安排健檢，
+    並爭取相應醫療福利。
+  </p>
+
+  <h3>制度改革</h3>
+
+  <p>
+    返觀台灣公共治理協會理事長何昀峯提出，
+    可研議讓基層獄政人員取得
+    「公務人員兼勞工」的身分，
+    為組織工會建立法律空間。
+  </p>
+
+  <p>
+    然而，修法是否能夠推動，
+    政府是否願意聽見基層的聲音，
+    仍是未解的問題。
+  </p>
+</section>
+
+<!-- 結尾 -->
+
+<section class="ending">
+  <div class="ending-inner">
+
+    <div class="chapter-label">EPILOGUE｜鐵門之外</div>
+
+    <h2>當鐵門關上，誰來保障守門的人？</h2>
+
+    <p>
+      從悶熱的舍房、被切割的睡眠，
+      到難以發聲的職場文化，
+      監所管理員的勞動處境，
+      長期被關在外界難以看見的空間裡。
+    </p>
+
+    <p>
+      補習班宣傳的高薪與穩定，
+      並不能完整說明這份工作的代價。
+    </p>
+
+    <p>
+      獄政工會仍持續爭取基層權益，
+      希望改善工作環境與勞動保障。
+      但這些聲音能否真正進入制度，
+      仍取決於政府是否願意回應。
+    </p>
+
+  </div>
+</section>
+
+<footer>
+  <p>揭開「CP值最高」公務員的幻象</p>
+  <p>記者｜李翊瑄、郭品妤、葉蓁芸、蔡愷恆 ＠2024政大新聞系</p>
+  <p>圖片為依據報導內容製作的 AI 情境示意，非現場照片。</p>
+  <p>本頁為原報導精簡後內容，非逐字全文。</p>
+</footer>
+
+<script>
+  // 1. 閱讀進度條
+
+  const progress = document.getElementById("progress");
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const scrollHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const percentage =
+      scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+    progress.style.width = percentage + "%";
+  }
+
+  window.addEventListener("scroll", updateProgress, {
+    passive: true
+  });
+
+  updateProgress();
+
+
+  // 2. 一般元素滑入淡出
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
+
+
+  // 3. 固定圖片 + 捲動文字切換
+
+  const steps = document.querySelectorAll(".story-step");
+  const storyImages = document.querySelectorAll(
+    ".scrolly-visual img[data-image]"
+  );
+
+  function activateStep(index) {
+    steps.forEach((step) => {
+      step.classList.toggle(
+        "active",
+        Number(step.dataset.step) === index
+      );
+    });
+
+    storyImages.forEach((image) => {
+      image.classList.toggle(
+        "active",
+        Number(image.dataset.image) === index
+      );
+    });
+  }
+
+  function updateScrolly() {
+    if (!steps.length) return;
+
+    const targetY = window.innerHeight * 0.55;
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+
+    steps.forEach((step, index) => {
+      const rect = step.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - targetY);
+
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    activateStep(nearestIndex);
+  }
+
+  window.addEventListener("scroll", updateScrolly, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateScrolly);
+  updateScrolly();
+
+
+  // 4. 數據長條動畫
+
+  const bars = document.querySelectorAll(".bar-fill[data-width]");
+
+  const barObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          bar.style.width = bar.dataset.width;
+          barObserver.unobserve(bar);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  bars.forEach((bar) => {
+    barObserver.observe(bar);
+  });
+</script>
+
+</body>
+</html>
