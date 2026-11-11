@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五頁捲動練習</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        .page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        #page1 { background: #ffd6a5; }
+        #page2 { background: #caffbf; }
+        #page3 { height: 300vh; background: #9bf6ff; }
+        #page4 { background: #bdb2ff; }
+        #page5 { background: #ffc6ff; }
+    </style>
+</head>
+<body>
+    <div class="page" id="page1">第一頁</div>
+    <div class="page" id="page2">第二頁</div>
+    <div class="page" id="page3">第三頁</div>
+    <div class="page" id="page4">第四頁</div>
+    <div class="page" id="page5">第五頁</div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            var animating = false;
+            var locked = false;
+            var timer;
+            var touchY;
+            var touching = false;
+
+            // 等手勢及觸控板慣性結束，避免一次跳過兩頁。
+            function holdGesture() {
+                locked = true;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    if (!animating && !touching) locked = false;
+                }, 200);
+            }
+
+            function move(delta, event, isTouch) {
+                if (!delta) return;
+                if (locked) {
+                    event.preventDefault();
+                    holdGesture();
+                    return;
+                }
+
+                var top = $(window).scrollTop();
+                var second = $('#page2').offset().top;
+                var fourth = $('#page4').offset().top;
+                var thirdBottom = fourth - window.innerHeight;
+                var fifth = $('#page5').offset().top;
+                var target;
+
+                // 第二頁至第三頁底部：連續捲動。
+                if ((delta > 0 && top >= second - 1 && top < thirdBottom - 1) ||
+                    (delta < 0 && top > second + 1 && top <= thirdBottom + 1)) {
+                    var next = Math.max(second, Math.min(thirdBottom, top + delta));
+                    // 滾輪保留原生捲動；觸控逐步移動，避免慣性越過邊界。
+                    if (isTouch || next !== top + delta) {
+                        event.preventDefault();
+                        $(window).scrollTop(next);
+                    }
+                    if (next === second || next === thirdBottom) holdGesture();
+                    return;
+                }
+
+                // 其餘三個銜接，一有捲動手勢就滑頁，反向亦然。
+                event.preventDefault();
+                if (delta > 0) {
+                    if (top < second - 1) target = second;
+                    else if (top < fourth - 1) target = fourth;
+                    else target = fifth;
+                } else {
+                    if (top > fourth + 1) target = fourth;
+                    else if (top > thirdBottom + 1) target = thirdBottom;
+                    else target = 0;
+                }
+                if (Math.abs(top - target) < 1) return;
+
+                animating = true;
+                holdGesture();
+                $('html, body').stop().animate({ scrollTop: target }, 600)
+                    .promise().done(function () {
+                        animating = false;
+                        holdGesture();
+                    });
+            }
+
+            window.addEventListener('wheel', function (event) {
+                if (event.ctrlKey) return; // 保留觸控板縮放。
+                var delta = event.deltaY;
+                if (event.deltaMode === 1) delta *= 16;
+                if (event.deltaMode === 2) delta *= window.innerHeight;
+                move(delta, event, false);
+            }, { passive: false });
+
+            window.addEventListener('touchstart', function (event) {
+                touching = event.touches.length === 1;
+                touchY = touching ? event.touches[0].clientY : undefined;
+            }, { passive: true });
+
+            window.addEventListener('touchmove', function (event) {
+                if (event.touches.length !== 1 || touchY === undefined) return;
+                var nextY = event.touches[0].clientY;
+                move(touchY - nextY, event, true);
+                touchY = nextY;
+            }, { passive: false });
+
+            window.addEventListener('touchend', endTouch, { passive: true });
+            window.addEventListener('touchcancel', endTouch, { passive: true });
+            function endTouch() {
+                touching = false;
+                touchY = undefined;
+                if (locked) holdGesture();
+            }
+        });
+    </script>
+</body>
+</html>
