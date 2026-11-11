@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五頁捲動練習</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        #page1 { background-color: #ffd6a5; }
+        #page2 { background-color: #caffbf; }
+        #page3 {
+            height: 300vh;
+            background-color: #9bf6ff;
+        }
+        #page4 { background-color: #bdb2ff; }
+        #page5 { background-color: #ffc6ff; }
+    </style>
+</head>
+<body>
+    <div class="page" id="page1">第一頁</div>
+    <div class="page" id="page2">第二頁</div>
+    <div class="page" id="page3">第三頁</div>
+    <div class="page" id="page4">第四頁</div>
+    <div class="page" id="page5">第五頁</div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            var locked = false;
+            var isAnimating = false;
+            var unlockTimer;
+            var touchY;
+
+            function holdGesture() {
+                locked = true;
+                clearTimeout(unlockTimer);
+                if (isAnimating) return;
+                // 等這次手勢與觸控板慣性結束，才接受下一次換頁。
+                unlockTimer = setTimeout(function () {
+                    locked = false;
+                }, 250);
+            }
+
+            function move(delta) {
+                if (!delta) return;
+                if (locked) {
+                    holdGesture();
+                    return;
+                }
+
+                var top = $(window).scrollTop();
+                var second = $('#page2').offset().top;
+                var fourth = $('#page4').offset().top;
+                var thirdBottom = fourth - $(window).height();
+                var fifth = $('#page5').offset().top;
+                var target;
+
+                // 第二頁到第三頁底部正常捲動，不提前露出第四頁。
+                if ((delta > 0 && top >= second - 1 && top < thirdBottom - 1) ||
+                    (delta < 0 && top > second + 1 && top <= thirdBottom + 1)) {
+                    target = Math.max(second, Math.min(thirdBottom, top + delta));
+                    $(window).scrollTop(target);
+                    if (target === second || target === thirdBottom) holdGesture();
+                    return;
+                }
+
+                // 其他銜接一偵測到手勢，就自動播放完整的滑頁動畫。
+                if (delta > 0) {
+                    if (top < second - 1) {
+                        target = second;
+                    } else if (top < fourth - 1) {
+                        target = fourth;
+                    } else {
+                        target = fifth;
+                    }
+                } else {
+                    if (top >= fifth - 1) {
+                        target = fourth;
+                    } else if (top > thirdBottom + 1) {
+                        target = thirdBottom;
+                    } else {
+                        target = 0;
+                    }
+                }
+
+                if (Math.abs(top - target) < 1) return;
+
+                isAnimating = true;
+                holdGesture();
+                $('html, body').stop().animate({
+                    scrollTop: target
+                }, 600).promise().done(function () {
+                    isAnimating = false;
+                    holdGesture();
+                });
+            }
+
+            // 在瀏覽器開始捲動畫面前攔截滾輪。
+            window.addEventListener('wheel', function (event) {
+                if (event.ctrlKey) return; // 保留觸控板縮放。
+                if (!event.deltaY) return;
+                event.preventDefault();
+                var delta = event.deltaY;
+                if (event.deltaMode === 1) delta *= 16;
+                if (event.deltaMode === 2) delta *= window.innerHeight;
+                move(delta);
+            }, { passive: false });
+
+            window.addEventListener('touchstart', function (event) {
+                if (event.touches.length === 1) touchY = event.touches[0].clientY;
+            }, { passive: true });
+
+            window.addEventListener('touchmove', function (event) {
+                if (event.touches.length !== 1 || touchY === undefined) return;
+                event.preventDefault();
+                var nextY = event.touches[0].clientY;
+                move(touchY - nextY);
+                touchY = nextY;
+            }, { passive: false });
+
+            $(window).on('keydown', function (event) {
+                var delta;
+                if (event.key === 'ArrowDown') delta = 40;
+                if (event.key === 'ArrowUp') delta = -40;
+                if (event.key === 'PageDown') delta = window.innerHeight;
+                if (event.key === 'PageUp') delta = -window.innerHeight;
+                if (event.key === ' ') delta = (event.shiftKey ? -1 : 1) * window.innerHeight;
+                if (delta) {
+                    event.preventDefault();
+                    move(delta);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
