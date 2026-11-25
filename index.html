@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>下一站，回家？｜2026高雄青年返鄉政策探索</title>
+
+  <style>
+    :root {
+      --dark: #11272e;
+      --paper: #f1f5f1;
+      --ink: #15353e;
+      --accent: #f4b58d;
+      --muted: #bfd0d2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--paper);
+      font: 17px/1.85 "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: 5px;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    select:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid #df804e;
+      outline-offset: 4px;
+    }
+
+    h1,
+    h2 {
+      font-family: "Songti TC", "Noto Serif TC", serif;
+      font-weight: 500;
+    }
+
+    h2 {
+      margin: 14px 0 25px;
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: 23px;
+      line-height: 1.6;
+    }
+
+    p {
+      margin: 0 0 20px;
+    }
+
+    section,
+    footer {
+      padding: 90px max(6%, calc((100vw - 1120px) / 2));
+    }
+
+    .light {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .eyebrow {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    .light .eyebrow {
+      color: #844729;
+    }
+
+    .lead {
+      max-width: 780px;
+      font-size: 21px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .light .small {
+      color: #506b72;
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      padding: 12px 0 12px 22px;
+      margin: 28px 0;
+    }
+
+    .action {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .toolbar p {
+      margin: 0;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 30px;
+      border: 1px dashed #a7bcbd;
+    }
+
+    /* 導覽 */
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 14px 5%;
+      background: #11272eee;
+      border-bottom: 1px solid #ffffff30;
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    #progress {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      z-index: 21;
+      width: 0;
+      height: 3px;
+      background: var(--accent);
+      pointer-events: none;
+    }
+
+    /* 影片開場 */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(
+        ellipse at 75% 35%,
+        #526d72,
+        #142c34 70%
+      );
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .shade {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        #0002,
+        #0005 50%,
+        #000c
+      );
+    }
+
+    .hero-copy {
+      width: 100%;
+      padding: 140px 6% 190px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 25px 0;
+      font-size: clamp(25px, 3.8vw, 57px);
+      line-height: 1.95;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 20px #0009;
+    }
+
+    .hero h1 span {
+      display: block;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 1.8s, transform 1.8s;
+    }
+
+    .hero h1 span.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero .action {
+      margin-top: 25px;
+    }
+
+    .media-controls {
+      position: absolute;
+      bottom: 25px;
+      left: 5%;
+      right: 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .media-controls button {
+      padding: 8px 17px;
+      border: 1px solid #ffffff80;
+      border-radius: 25px;
+      background: #11272e99;
+      color: white;
+      font-size: 14px;
+    }
+
+    .media-controls p {
+      margin: 0 0 0 auto;
+      font-size: 14px;
+    }
+
+    .sound-toggle {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 25;
+      padding: 9px 18px;
+      border: 1px solid #ffffff80;
+      border-radius: 25px;
+      background: #11272eee;
+      color: white;
+      font-size: 14px;
+    }
+
+    .media-feedback {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .transition {
+      text-align: center;
+    }
+
+    .transition h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+    }
+
+    /* 需求選擇 */
+
+    .needs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 35px 0;
+    }
+
+    .need {
+      padding: 23px 15px;
+      border: 1px solid #91aaad;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .need b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 21px;
+    }
+
+    .need span {
+      font-size: 15px;
+    }
+
+    .need[aria-pressed="true"] {
+      background: var(--ink);
+      color: white;
+      box-shadow: inset 0 4px var(--accent);
+    }
+
+    .selection-status {
+      padding: 15px 0;
+      border-top: 1px solid #a6b9ba;
+    }
+
+    /* 政策卡 */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 25px 0;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 28px;
+      border: 1px solid #b4c6c5;
+      background: white;
+      color: var(--ink);
+    }
+
+    .card.selected {
+      box-shadow: inset 0 4px #c36d3b;
+    }
+
+    .card h3 {
+      margin: 15px 0;
+    }
+
+    .byline {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #d2ddda;
+      font-size: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #f7e4d6;
+      color: #6a402a;
+      font-size: 14px;
+    }
+
+    .tags {
+      margin-top: 8px;
+      color: #47636a;
+      font-size: 14px;
+    }
+
+    .card details {
+      margin-top: auto;
+      padding-top: 15px;
+      border-top: 1px solid #d4dfdb;
+    }
+
+    summary {
+      cursor: pointer;
+    }
+
+    .card details p {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+
+    .card-source {
+      margin: 15px 0;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .save {
+      width: 100%;
+      margin-top: 18px;
+      padding: 10px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .save[aria-pressed="true"] {
+      background: var(--ink);
+      color: white;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 0;
+    }
+
+    /* 市長轉場至議員 */
+
+    .bridge {
+      background: #d68057;
+      color: #132d35;
+    }
+
+    .bridge .eyebrow {
+      color: #2b4144;
+    }
+
+    .authority {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin: 35px 0;
+    }
+
+    .authority div {
+      padding-top: 15px;
+      border-top: 1px solid #9ab1b5;
+    }
+
+    .authority h3 {
+      margin: 0 0 12px;
+    }
+
+    /* 選區 */
+
+    .district-box {
+      margin: 35px 0;
+      padding: 28px;
+      border: 1px solid #8ca7ab;
+    }
+
+    .fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .field {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .inquiry-search {
+      width: 100%;
+      min-width: 0;
+      padding: 12px 15px;
+      border: 1px solid #91a8ac;
+      border-radius: 0;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .inquiry-search:focus-visible {
+      outline: 3px solid #df804e;
+      outline-offset: 4px;
+    }
+
+    .inquiry-form .field {
+      min-width: min(220px, 100%);
+    }
+
+    .inquiry-card .card-source {
+      margin-top: auto;
+      padding-top: 15px;
+    }
+
+    select {
+      appearance: none;
+      width: 100%;
+      padding: 12px 42px 12px 15px;
+      border: 1px solid #91a8ac;
+      color: var(--ink);
+      background:
+        white
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='m5 8 5 5 5-5' fill='none' stroke='%2315353e' stroke-width='2'/%3E%3C/svg%3E")
+        no-repeat right 12px center;
+    }
+
+    .district-result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .district-result p {
+      margin-bottom: 10px;
+    }
+
+    .district-result a {
+      font-size: 15px;
+    }
+
+    /* 收藏 */
+
+    .shelf {
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid #ffffff40;
+    }
+
+    .other-district {
+      padding: 9px;
+      background: #f6e3d4;
+      color: #694020;
+      font-size: 14px;
+    }
+
+    .sources-list li {
+      padding: 12px 0;
+    }
+
+    .sources-list p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* AI聲明：最後一頁至少100vh */
+
+    footer {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      background: #dae8e0;
+      color: var(--ink);
+    }
+
+    footer .eyebrow {
+      color: #844729;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px 45px;
+    }
+
+    .ai-grid h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .ai-grid p {
+      font-size: 16px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid #91aaa1;
+      font-size: 14px;
+    }
+
+    /* 手機版 */
+
+    @media (max-width: 850px) {
+      .needs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .needs .need:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links .optional {
+        display: none;
+      }
+
+      .hero h1 span:last-child {
+        max-width: 14em;
+        margin: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 16px;
+      }
+
+      section,
+      footer {
+        padding: 65px 7%;
+      }
+
+      .hero {
+        padding: 0;
+      }
+
+      .hero-copy {
+        padding: 130px 6% 190px;
+      }
+
+      .media-controls p {
+        width: 100%;
+        margin: 0;
+      }
+
+      nav {
+        font-size: 13px;
+      }
+
+      .authority,
+      .ai-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 23px;
+      }
+
+      .lead {
+        font-size: 19px;
+      }
+
+      .district-box {
+        padding: 22px;
+      }
+
+      .need b {
+        font-size: 19px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero h1 span {
+        transition: none;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav aria-label="主要導覽">
+    <a href="#opening">下一站，回家？</a>
+
+    <div class="nav-links">
+      <a href="#mayor">市長篇</a>
+      <a href="#council">議員篇</a>
+      <a class="optional" href="#inquiries">質詢查詢</a>
+      <a href="#collection">收藏 <span id="nav-count">0</span></a>
+      <a class="optional" href="#ai">AI聲明</a>
+    </div>
+  </nav>
+
+  <div id="progress" aria-hidden="true"></div>
+
+  <button class="sound-toggle" id="sound" type="button" aria-pressed="false">
+    開啟音樂
+  </button>
+
+  <main>
+    <!-- 影片：直接播放剪好的檔案 -->
+
+    <section class="hero" id="opening" aria-label="回家的旅程">
+      <video id="video" muted playsinline preload="auto">
+        <source src="train.mp4" type="video/mp4">
+      </video>
+
+      <div class="shade" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">2026高雄 · 青年返鄉政策探索</p>
+
+        <h1>
+          <span>不只是回家投票，</span>
+          <span>我想投的，</span>
+          <span>是一個能讓我回去生活的家鄉。</span>
+        </h1>
+
+        <a href="#needs" class="action">找找我認同的方案</a>
+      </div>
+
+      <div class="media-controls">
+        <button id="play" type="button">播放影片</button>
+        <button id="replay" type="button">重播</button>
+
+        <p id="media-status" class="media-feedback" role="status"></p>
+      </div>
+
+      <audio id="music" preload="auto" loop>
+        <source src="music.m4a" type="audio/mp4">
+      </audio>
+    </section>
+
+    <section class="transition">
+      <p class="eyebrow">回家，不只是地理上的移動。</p>
+
+      <h2>
+        留下來需要什麼，<br>
+        我們可以自己選擇。
+      </h2>
+
+      <p class="lead" style="margin: auto;">
+        先選擇你在意的生活條件，再閱讀政策、查看來源、
+        收藏認同的方案。市長篇看城市方向；議員篇回到你的選區。
+      </p>
+    </section>
+
+    <!-- 需求複選 -->
+
+    <section class="light" id="needs">
+      <p class="eyebrow">從自己的需求開始</p>
+
+      <h2>什麼條件，<br>會讓你考慮回高雄？</h2>
+
+      <p class="lead">
+        可以複選。沒有選擇時顯示所有收錄方案；
+        選擇後，只顯示涉及任一所選議題的內容。
+      </p>
+
+      <div
+        id="needs-buttons"
+        class="needs"
+        role="group"
+        aria-label="選擇返鄉需求"
+      ></div>
+
+      <div class="toolbar">
+        <button id="reset-needs" class="action" type="button">
+          顯示全部議題
+        </button>
+
+        <a href="#mayor">開始看市長方案</a>
+      </div>
+
+      <p
+        id="needs-status"
+        class="selection-status"
+        role="status"
+      ></p>
+
+      <p class="small">
+        這是閱讀篩選，不是調查，也不推論你的政治立場。
+        收藏方案不等於支持該人全部政見。
+      </p>
+    </section>
+
+    <!-- 市長篇 -->
+
+    <section class="light" id="mayor">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">市長篇 · 全高雄共同的一票</p>
+          <h2>誰提出了<br>你想要的城市？</h2>
+        </div>
+
+        <a
+          class="action"
+          id="mayor-original"
+          target="_blank"
+          rel="noopener"
+        >
+          閱讀完整市長公報
+        </a>
+      </div>
+
+      <p class="lead" style="margin-top: 25px;">
+        市長提出市政計畫並推動執行。
+        閱讀一項承諾時，也問問它的對象、預算與完成時間。
+      </p>
+
+      <p class="note small">
+        本篇列入官方公報中的五位市長候選人，依號次排列；
+        只摘選與本作議題相關的段落。
+        部分細節補充自競選官網，逐卡標示。
+        所有內容都是候選人主張，不是已實施政策或成效保證。
+      </p>
+
+      <div class="toolbar">
+        <p id="mayor-count" role="status"></p>
+
+        <button class="action show-all" type="button">
+          清除需求篩選
+        </button>
+      </div>
+
+      <div class="cards" id="mayor-cards"></div>
+    </section>
+
+    <!-- 市長轉場至議員 -->
+
+    <section class="bridge">
+      <p class="eyebrow">從城市方向，回到地方代表</p>
+
+      <h2>方案如何落實，<br>也需要議會持續追問。</h2>
+
+      <div class="authority">
+        <div>
+          <h3>市長的角色</h3>
+          <p>
+            規劃市政、提出預算與政策，
+            透過市府團隊推動執行。
+          </p>
+        </div>
+
+        <div>
+          <h3>議員的角色</h3>
+          <p>
+            審議預算、提案、質詢與監督。
+            競選主張中的「爭取」，
+            仍需要行政部門與法定程序配合。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 議員篇：選區放在這裡 -->
+
+    <section class="light" id="council">
+      <p class="eyebrow">議員篇 · 現在回到你的選區</p>
+
+      <h2>
+        你在意的返鄉條件，<br>
+        誰在你的選區提出主張？
+      </h2>
+
+      <p class="lead">
+        選擇投票戶籍所在行政區與議員類別。
+        這裡不使用定位，也不以目前居住地判定投票資格。
+      </p>
+
+      <div class="district-box">
+        <div class="fields">
+          <div class="field">
+            <label for="area">投票戶籍所在行政區</label>
+
+            <select id="area">
+              <option value="">請選擇行政區</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="elector-type">議員選舉類別</label>
+
+            <select id="elector-type">
+              <option value="regional">區域議員</option>
+              <option value="plain">平地原住民議員</option>
+              <option value="mountain">山地原住民議員</option>
+            </select>
+          </div>
+        </div>
+
+        <div
+          class="district-result"
+          id="district-result"
+          role="status"
+        >
+          選擇後顯示對應選區。
+        </div>
+
+        <p class="small">
+          原住民議員須依身分類別選擇；
+          系統僅協助對應選區，實際投票資格與領票
+          以選務機關及投票通知單為準。
+        </p>
+      </div>
+
+      <p class="note small">
+        以下是各選區的主題摘選，
+        並非全體候選人名單或完整政見。
+        分類由本作整理；沒有被收錄或未符合篩選，
+        不代表候選人沒有政策。
+        請搭配本選區完整公報閱讀。
+      </p>
+
+      <div class="toolbar">
+        <p id="council-count" role="status"></p>
+
+        <button class="action show-all" type="button">
+          清除需求篩選
+        </button>
+      </div>
+
+      <div class="cards" id="council-cards"></div>
+
+      <a class="action" href="#inquiries">查詢過去的青年就業質詢</a>
+    </section>
+
+    <section class="light" id="inquiries" aria-labelledby="inquiry-heading">
+      <p class="eyebrow">議會紀錄 · 從主張追到質詢</p>
+      <h2 id="inquiry-heading">回鄉工作這件事，<br>議會裡怎麼問？</h2>
+      <p class="lead">
+        從報導者觀測站高雄「青年就業與創業」主題，
+        摘選與返鄉工作條件相關的七筆質詢。
+        先找你在意的問題，再回到逐字稿閱讀上下文與官員回應。
+      </p>
+
+      <form id="inquiry-form" class="district-box inquiry-form" role="search" aria-label="查詢青年就業質詢">
+        <div class="fields">
+          <div class="field">
+            <label for="inquiry-keyword">關鍵字</label>
+            <input id="inquiry-keyword" class="inquiry-search" type="search"
+              placeholder="例如：返鄉、旗美、交通補助" aria-controls="inquiry-cards">
+          </div>
+          <div class="field">
+            <label for="inquiry-member">質詢議員</label>
+            <select id="inquiry-member" aria-controls="inquiry-cards">
+              <option value="">全部收錄議員</option>
+              <option>林義迪</option>
+              <option>陳美雅</option>
+              <option>李雅靜</option>
+              <option>鄭孟洳</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="inquiry-topic">工作議題</label>
+            <select id="inquiry-topic" aria-controls="inquiry-cards">
+              <option value="">全部議題</option>
+              <option>在地工作與產業</option>
+              <option>職涯與就業媒合</option>
+              <option>交通與跨域就業</option>
+              <option>創業資源</option>
+            </select>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button class="action" type="submit">查詢質詢</button>
+          <button class="action" type="reset">清除查詢條件</button>
+        </div>
+        <p class="small">可輸入多個關鍵字，以空格分隔；以下僅搜尋本站摘選內容。</p>
+      </form>
+
+      <p id="inquiry-count" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="cards" id="inquiry-cards"></div>
+      <noscript><p>請啟用 JavaScript 使用本站篩選，或透過下方連結前往觀測站查詢。</p></noscript>
+
+      <p class="note small">
+        本站摘要與議題分類為編輯整理，非議員逐字原話；收錄含直接返鄉議題，
+        以及與返鄉工作條件相關的就業、交通與創業討論。
+        這七筆不是完整資料庫，未收錄不代表沒有質詢。
+        過去質詢不等於本次政見，也不代表政策已落實。
+        資料查閱日期：2026年11月25日；本站不會自動同步觀測站更新。
+      </p>
+      <a class="action"
+        href="https://lawmaker.twreporter.org/council/kaohsiung/topic/kaohsiung-youth-employment-and-entrepreneurship"
+        target="_blank" rel="noopener">前往觀測站查詢更多發言與議案</a>
+    </section>
+
+    <!-- 收藏結果 -->
+
+    <section id="collection">
+      <p class="eyebrow">把選擇帶走</p>
+
+      <h2>我的返鄉政策清單</h2>
+
+      <p class="lead">
+        這是你收藏的方案，沒有推薦分數或候選人排名。
+        你可以同時認同不同人的提案，
+        再回到原文形成判斷。
+      </p>
+
+      <div class="toolbar">
+        <button class="action" id="download" type="button">
+          下載文字清單
+        </button>
+
+        <button class="action" id="clear-saved" type="button">
+          清空收藏
+        </button>
+
+        <span id="saved-count" role="status"></span>
+      </div>
+
+      <p class="small">
+        收藏只保留在這次開啟的頁面，重新整理會清除；
+        切換需求或選區不會刪除收藏。
+        下載的清單包含來源連結。
+      </p>
+
+      <div class="shelf">
+        <h3>市長方案</h3>
+        <div id="saved-mayor" class="cards"></div>
+      </div>
+
+      <div class="shelf">
+        <h3>議員方案</h3>
+        <div id="saved-council" class="cards"></div>
+      </div>
+
+      <p class="note">
+        收藏之後再問一次：這項政策適用於我嗎？
+        有沒有交代預算與時程？
+        承諾的成果，要在哪裡檢查？
+      </p>
+
+      <div class="shelf" aria-labelledby="preference-heading">
+        <p class="eyebrow">最後一站 · 整理自己的選擇</p>
+        <h3 id="preference-heading">我的投票議題偏好</h3>
+        <p>
+          把你目前勾選的需求與收藏方案，整理成一份議題摘要。
+          看看自己正在關注哪些返鄉條件，再帶著問題閱讀政策原文。
+        </p>
+        <div class="toolbar">
+          <button class="action" id="generate-preferences" type="button"
+            aria-controls="preference-result">生成我的議題摘要</button>
+          <button class="action" id="download-preferences" type="button" disabled>
+            下載議題摘要
+          </button>
+        </div>
+        <p id="preference-status" class="small" role="status" aria-live="polite">
+          選擇需求或收藏方案後，就可以生成摘要。
+        </p>
+        <div id="preference-result" hidden>
+          <p id="preference-intro" class="lead"></p>
+          <div id="preference-cards" class="cards"></div>
+          <p class="small">
+            需求勾選代表目前的探索範圍，收藏代表你想進一步比較的方案。
+            同一方案可計入多個議題，項數不代表重視程度；收藏統計包含其他選區方案。
+            摘要依本頁選擇自動整理，僅在這次開啟的頁面保留，重新整理即清除。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 來源與方法 -->
+
+    <section id="sources">
+      <p class="eyebrow">資料與收錄方法</p>
+
+      <h2>看見方案，<br>也看見它的出處。</h2>
+
+      <ol class="sources-list">
+        <li>
+          <a id="source-mayor" target="_blank" rel="noopener">
+            中央選舉委員會｜2026高雄市長選舉公報
+          </a>
+
+          <p>
+            確認五位候選人、號次與公報主張；
+            官方刊登不等於替政見可行性背書。
+          </p>
+        </li>
+
+        <li>
+          <a id="source-council" target="_blank" rel="noopener">
+            中央選舉委員會｜2026高雄市議員各選區公報
+          </a>
+
+          <p>
+            對應行政區與議員類別，摘選就業、所得、
+            住宅、創業及生活支持相關內容。
+            卡片是短摘要，不是完整政見。
+          </p>
+        </li>
+
+        <li>
+          <a
+            href="https://www.zenolai.tw/policy/youth/10"
+            target="_blank"
+            rel="noopener"
+          >
+            賴瑞隆競選官網｜青年政策
+          </a>
+
+          <p>補充實習轉正與創業支持方案，屬競選承諾。</p>
+        </li>
+
+        <li>
+          <a
+            href="https://kochihen2026.tw/policy/成就青年"
+            target="_blank"
+            rel="noopener"
+          >
+            柯志恩競選官網｜成就青年
+          </a>
+
+          <p>補充非典型就業與青年居住方案，屬競選承諾。</p>
+        </li>
+
+        <li>
+          <a
+            href="https://lawmaker.twreporter.org/council/kaohsiung/topic/kaohsiung-youth-employment-and-entrepreneurship"
+            target="_blank"
+            rel="noopener"
+          >
+            報導者觀測站｜高雄青年就業與創業
+          </a>
+
+          <p>
+            作為過去問政的延伸查詢入口，
+            本作不將其摘要改列為2026競選政見。
+          </p>
+        </li>
+      </ol>
+
+      <p class="small">
+        資料查閱：2026/11/25。
+        議員篇屬主題摘選，未涵蓋每位候選人的每項政策；
+        不以卡片數量推論支持程度。
+        政策與返鄉條件的關聯屬本作編輯分類，
+        不代表已證明政策能促成返鄉。
+        無訪談、無民意調查、無勝負預測。
+        正式交件前請由作者人工覆核，
+        公開使用影音前確認素材權利。
+      </p>
+    </section>
+  </main>
+
+  <!-- 最後一頁：100vh AI使用聲明 -->
+
+  <footer id="ai">
+    <div>
+      <p class="eyebrow">最後一站 · 製作透明</p>
+
+      <h2>AI使用聲明</h2>
+
+      <p class="lead">
+        讓資料的出處與製作方法，
+        和政策一樣可以被檢查。
+      </p>
+
+      <div class="ai-grid">
+        <div>
+          <h3>使用工具與用途</h3>
+          <p>
+            OpenAI Codex協助企劃、搜尋公開資料、
+            閱讀選舉公報、整理短摘要、
+            編寫網頁與測試互動。
+            政策分類與追問由AI協助撰寫，不是候選人原話。
+          </p>
+        </div>
+
+        <div>
+          <h3>影音素材</h3>
+          <p>
+            開場高鐵影片來源為
+            <a href="https://www.youtube.com/@bv2dp" target="_blank" rel="noopener">
+              臺灣交通鐵道影像 野球應援 Taiwan Railway Movies BV2DP
+            </a>，本頁使用剪輯片段作為開場。
+            背景音樂為作者提供的黃玠〈想回家的時候〉音檔，從頭循環播放。
+            影片作為情境引入，不證明青年遷移原因；
+            未生成受訪者或仿冒聲音。
+          </p>
+        </div>
+
+        <div>
+          <h3>查核與限制</h3>
+          <p>
+            製作時對照官方公報與競選官網，
+            保留逐卡來源。
+            AI核對不等於完成作者人工覆核；
+            正式交件由作者確認摘要、選區、
+            更新日期及素材權利。
+          </p>
+        </div>
+
+        <div>
+          <h3>互動與個人資料</h3>
+          <p>
+            讀者以需求篩選、選區選擇及收藏方案形成閱讀路徑。
+            可在最後生成自己的議題摘要，整理勾選需求與收藏方案的議題分布。
+            選擇只存在當前頁面，不上傳、不追蹤、
+            不建立政治偏好檔案，
+            也不產生投票推薦分數。
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>下一站，回家？ · 2026政策探索參考版</span>
+        <a href="#opening">回到旅程起點</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================
+       一、來源與資料
+       ======================================== */
+
+    const councilBase =
+      "https://bulletin.cec.gov.tw/01選舉公報/05直轄市議員/115年/05高雄市/";
+
+    const councilIndex =
+      "https://bulletin.cec.gov.tw/?dir=01選舉公報/05直轄市議員/115年/05高雄市";
+
+    const mayorPDF =
+      "https://bulletin.cec.gov.tw/01選舉公報/03直轄市長/115年/高雄市市長.pdf";
+
+    const laiURL =
+      "https://www.zenolai.tw/policy/youth/10";
+
+    const koWork =
+      "https://kochihen2026.tw/policy/成就青年/勇敢築夢、安心打拚";
+
+    const koHome =
+      "https://kochihen2026.tw/policy/成就青年/居住正義三支箭";
+
+    const topics = {
+      job: ["找到合適工作", "專長與職涯"],
+      pay: ["收入支持生活", "薪資與勞動條件"],
+      home: ["有地方安住", "住宅與租屋"],
+      startup: ["創業有人支持", "資金、輔導與通路"],
+      life: ["生活有人接住", "照顧與通勤"]
+    };
+
+    // 區域議員：38行政區對應第1至第11選區。
+    const regions = {
+      1: [
+        "桃源區", "那瑪夏區", "甲仙區",
+        "六龜區", "杉林區", "內門區",
+        "旗山區", "美濃區", "茂林區"
+      ],
+      2: [
+        "茄萣區", "湖內區", "路竹區",
+        "阿蓮區", "田寮區"
+      ],
+      3: [
+        "永安區", "岡山區", "燕巢區",
+        "彌陀區", "梓官區", "橋頭區"
+      ],
+      4: ["楠梓區", "左營區"],
+      5: ["大社區", "仁武區", "鳥松區", "大樹區"],
+      6: ["鼓山區", "鹽埕區", "旗津區"],
+      7: ["三民區"],
+      8: ["前金區", "新興區", "苓雅區"],
+      9: ["鳳山區"],
+      10: ["前鎮區", "小港區"],
+      11: ["大寮區", "林園區"]
+    };
+
+    // 平地原住民為第12選區。
+    // 山地原住民依行政區對應第13、14、15選區。
+    const mountain = {
+      13: [
+        "那瑪夏區", "甲仙區", "杉林區", "內門區",
+        "旗山區", "茄萣區", "湖內區", "路竹區",
+        "永安區", "彌陀區", "梓官區", "楠梓區",
+        "左營區", "三民區"
+      ],
+      14: [
+        "桃源區", "六龜區", "美濃區", "阿蓮區",
+        "田寮區", "岡山區", "燕巢區", "橋頭區",
+        "鼓山區", "鹽埕區", "前金區", "新興區"
+      ],
+      15: [
+        "茂林區", "大社區", "大樹區", "仁武區",
+        "鳥松區", "鳳山區", "大寮區", "旗津區",
+        "苓雅區", "前鎮區", "小港區", "林園區"
+      ]
+    };
+
+    function bulletin(district) {
+      if (district >= 12) {
+        return councilBase +
+          "高雄市第12、13、14、15選舉區.pdf";
+      }
+
+      return councilBase +
+        "高雄市第" +
+        String(district).padStart(2, "0") +
+        "選舉區.pdf";
+    }
+
+    /*
+      市長資料欄位：
+      號次、姓名、標題、標籤、摘要、追問、來源、來源名稱。
+      未另外指定來源時，使用官方市長公報。
+    */
+    const mayorRows = [
+      [
+        1,
+        "張靜",
+        "市府公共運輸免費",
+        ["life"],
+        "主張市府所屬公共運輸車船免費搭乘。",
+        "涵蓋哪些路線？如何補足營運成本？"
+      ],
+      [
+        2,
+        "王肇民",
+        "財源分配納入北漂因素",
+        ["pay", "life"],
+        "主張統籌分配款納入北漂人口等指數。",
+        "計算方式與修法路徑為何？如何轉為青年支持？"
+      ],
+      [
+        3,
+        "柯志恩",
+        "非典型工作青年轉正支持",
+        ["job", "pay"],
+        "提出輔導津貼與轉正獎金，合計最高3萬元。",
+        "待業或接案者如何認定？是否追蹤轉正後待遇？",
+        koWork,
+        "競選官網｜2026/07/16"
+      ],
+      [
+        3,
+        "柯志恩",
+        "可負擔住宅與婚育社宅",
+        ["home"],
+        "提出可負擔住宅與婚育家庭延長社宅租期。",
+        "申購有設籍、年齡、育兒及無自宅條件，單身返鄉者如何被支持？",
+        koHome,
+        "競選官網｜2026/07/11"
+      ],
+      [
+        4,
+        "洪方隆",
+        "提高薪資中位數",
+        ["pay"],
+        "主張薪資中位數達年薪72萬元。",
+        "統計涵蓋誰？工具與預算為何？如何驗收？"
+      ],
+      [
+        5,
+        "賴瑞隆",
+        "實習轉正與通勤支持",
+        ["job", "pay", "life"],
+        "主張擴大實習，轉正留任獎勵最高1.5萬元、通勤補助最高2,000元。",
+        "已在外地工作的人適用嗎？職缺待遇如何把關？",
+        laiURL,
+        "競選官網｜2026/09/09"
+      ],
+      [
+        5,
+        "賴瑞隆",
+        "青年安居與創業支持",
+        ["home", "startup"],
+        "主張擴大租屋支持，串聯青創導師、資金媒合與市場通路。",
+        "申請資格、年度名額與經費如何設定？",
+        laiURL,
+        "競選官網｜2026/09/09"
+      ]
+    ];
+
+    /*
+      議員資料欄位：
+      選區、號次、姓名、標題、標籤、摘要。
+
+      以下是主題摘選，不是各選區全部候選人名單。
+      可依同樣格式增加經過查核的公報內容。
+    */
+    const councilRows = [
+      [
+        1, 2, "林義迪",
+        "爭取旗美軟體園區",
+        ["job"],
+        "爭取設置無污染軟體科學園區。"
+      ],
+      [
+        1, 3, "林慧欣",
+        "青創資源與在地就業",
+        ["startup", "job"],
+        "整合創業培力資源，打造青年創業聚落，並爭取交通與數位資源。"
+      ],
+      [
+        2, 1, "李柏融",
+        "茄萣青年住宅與在地工作",
+        ["home", "job", "startup"],
+        "爭取公有地平價青年宅，支持創業與在地工作。"
+      ],
+      [
+        2, 4, "陳琳潔",
+        "地方產業帶動在地就業",
+        ["startup", "job"],
+        "結合科技、農漁與山海特色，帶動觀光與就業。"
+      ],
+      [
+        3, 1, "方信淵",
+        "園區青創育成中心",
+        ["startup", "job"],
+        "串聯產業園區與青年創業，提出設立青創育成中心。"
+      ],
+      [
+        3, 7, "黃韻涵",
+        "產學媒合與青創中心",
+        ["job", "startup"],
+        "鼓勵大學城成立青創中心，建立科技產學媒合平台。"
+      ],
+      [
+        4, 8, "張以理",
+        "多元實習與平價住宅",
+        ["job", "home"],
+        "主張擴大實習產業職缺，以容積獎勵換取平價住宅。"
+      ],
+      [
+        4, 10, "陳麗珍",
+        "產學合作與青年住宅",
+        ["job", "home"],
+        "主張培育半導體人才、促進產學合作，並推動青年與社會住宅。"
+      ],
+      [
+        5, 2, "陳惠君",
+        "創業補助與青年公宅",
+        ["startup", "home"],
+        "爭取青創、文創及農產創新補助，以及青年與社會公宅。"
+      ],
+      [
+        5, 3, "張勝富",
+        "在地青年優先就業",
+        ["job", "home"],
+        "主張產業優先錄用在地青年，並推動全齡友善社會住宅。"
+      ],
+      [
+        6, 3, "蔡金晏",
+        "產業轉型與青年住宅",
+        ["job", "home"],
+        "主張產業轉型兼顧中小企業永續，讓社福資源涵蓋青年住宅。"
+      ],
+      [
+        6, 4, "陳美雅",
+        "創業、青年與產業升級",
+        ["startup", "job"],
+        "主張創造創業友善環境，支持青年多元就業並推動產業轉型。"
+      ],
+      [
+        7, 4, "黃香菽",
+        "產業育才與在地住宅",
+        ["job", "home"],
+        "主張產業轉型育才，並擴大社會住宅供給。"
+      ],
+      [
+        7, 7, "林于凱",
+        "勞工與青年居住支持",
+        ["pay", "home"],
+        "主張勞工合作社與勞工保障，並興建婚育宅、降低公設比及減輕青年居住負擔。"
+      ],
+      [
+        8, 1, "黃舜杰",
+        "青年回流與創業基地",
+        ["job", "startup"],
+        "提出青年回流及市中心青年工作、創業與生活場域。"
+      ],
+      [
+        8, 4, "湯詠瑜",
+        "青年創業與租屋支持",
+        ["startup", "home"],
+        "主張商圈轉型納入青年創業，並爭取租金補貼。"
+      ],
+      [
+        9, 3, "鄭安秝",
+        "創業補助與技職培育",
+        ["job", "startup"],
+        "主張青年實習、技能競賽與創業補助，並銜接技職教育。"
+      ],
+      [
+        9, 5, "陳慧文",
+        "青年創業與勞動保障",
+        ["startup", "pay"],
+        "主張青年創業與補助，並關注勞動權益及就業安全。"
+      ],
+      [
+        10, 4, "蔡武宏",
+        "亞灣就業與青年媒合",
+        ["job"],
+        "主張產業廊帶發展，職缺優先媒合在地青年與大專人才。"
+      ],
+      [
+        10, 6, "王仙玲",
+        "青年社宅減輕居住負擔",
+        ["home"],
+        "推動青年社會住宅，減輕青年與新婚家庭居住負擔。"
+      ],
+      [
+        11, 1, "洪村銘",
+        "創業共享空間與青年培育",
+        ["startup", "job"],
+        "主張創業共享空間，培育青年並銜接產業。"
+      ],
+      [
+        11, 5, "李雨庭",
+        "在地產業與青年創業",
+        ["startup", "job"],
+        "爭取青年創業及農漁產業創新，創造在地工作。"
+      ],
+      [
+        12, 2, "宋紹銘",
+        "原住民族就業與創業支持",
+        ["job", "startup"],
+        "主張單一窗口、就業媒合及創業支持，強化都市原住民服務。"
+      ],
+      [
+        12, 3, "王義雄",
+        "原住民青年住宅",
+        ["home"],
+        "爭取原住民青年社會住宅與專屬社宅。"
+      ],
+      [
+        13, 1, "陳幸富",
+        "農產行銷與在地產業",
+        ["startup", "job"],
+        "主張農產品牌行銷、原住民產業與在地資源發展。"
+      ],
+      [
+        13, 2, "葛姵瑩",
+        "服務窗口與產業行銷",
+        ["startup", "life"],
+        "主張原住民單一窗口，協助特產數位行銷與交通銜接。"
+      ],
+      [
+        14, 1, "洪英雄",
+        "都市服務與觀光產業",
+        ["job", "life"],
+        "主張都市原住民支持網絡，推動觀光以促進在地就業。"
+      ],
+      [
+        14, 3, "高忠德",
+        "原鄉、都市與青年支持",
+        ["job", "life"],
+        "主張原鄉就業及文化創業環境，並支持青年創業與技職發展。"
+      ],
+      [
+        15, 1, "金禾雅",
+        "返鄉創業與青年媒合",
+        ["job", "startup", "home"],
+        "主張人才媒合平台、返鄉創業支持，以及租屋和社宅資源。"
+      ],
+      [
+        15, 2, "陳奕蓁",
+        "產業與青年返鄉",
+        ["job"],
+        "提出產業有力、青年返鄉的政策方向。"
+      ]
+    ];
+
+    // 將資料轉成網頁使用的格式。
+    const policies = [
+      ...mayorRows.map((row, index) => ({
+        id: "m" + index,
+        role: "mayor",
+        district: 0,
+        number: row[0],
+        person: row[1],
+        title: row[2],
+        tags: row[3],
+        text: row[4],
+        question: row[5],
+        url: row[6] || mayorPDF,
+        source: row[7] || "2026市長選舉公報"
+      })),
+
+      ...councilRows.map((row, index) => ({
+        id: "c" + index,
+        role: "council",
+        district: row[0],
+        number: row[1],
+        person: row[2],
+        title: row[3],
+        tags: row[4],
+        text: row[5],
+        question:
+          "誰適用、多少名額、經費與時程如何安排？" +
+          "議員將如何提案、審議預算及追蹤？",
+        url: bulletin(row[0]),
+        source: "2026議員公報｜第" + row[0] + "選區"
+      }))
+    ];
+
+    /* ========================================
+       二、互動狀態與共用函式
+       ======================================== */
+
+    const chosen = new Set();
+    const saved = new Set();
+    let preferencesGenerated = false;
+
+    let currentDistrict = null;
+
+    const $ = id => document.getElementById(id);
+
+    function external(label, url) {
+      const link = document.createElement("a");
+
+      link.textContent = label;
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener";
+
+      return link;
+    }
+
+    function paragraph(text, className = "") {
+      const p = document.createElement("p");
+
+      p.textContent = text;
+      p.className = className;
+
+      return p;
+    }
+
+    function districtLabel(district) {
+      if (district === 12) {
+        return "第12選區｜平地原住民";
+      }
+
+      if (district >= 13) {
+        return "第" + district + "選區｜山地原住民";
+      }
+
+      return (
+        "第" + district + "選區｜" +
+        regions[district].join("、")
+      );
+    }
+
+    function selectedDistrict() {
+      const area = $("area").value;
+      const type = $("elector-type").value;
+
+      if (!area) return null;
+      if (type === "plain") return 12;
+
+      const mapping = type === "mountain"
+        ? mountain
+        : regions;
+
+      const result = Object.keys(mapping).find(
+        key => mapping[key].includes(area)
+      );
+
+      return Number(result) || null;
+    }
+
+    function matches(policy) {
+      return (
+        chosen.size === 0 ||
+        policy.tags.some(tag => chosen.has(tag))
+      );
+    }
+
+    /* ========================================
+       三、建立政策卡
+       ======================================== */
+
+    function createCard(policy, inCollection = false) {
+      const article = document.createElement("article");
+
+      article.className = "card";
+
+      if (saved.has(policy.id)) {
+        article.classList.add("selected");
+      }
+
+      if (
+        inCollection &&
+        policy.role === "council" &&
+        policy.district !== currentDistrict
+      ) {
+        article.append(
+          paragraph(
+            "其他選區收藏｜不屬於目前選定的議員選區",
+            "other-district"
+          )
+        );
+      }
+
+      const badgeBox = document.createElement("div");
+      const badge = document.createElement("span");
+
+      badge.className = "badge";
+      badge.textContent = "2026競選主張";
+
+      badgeBox.append(badge);
+      article.append(badgeBox);
+
+      article.append(
+        paragraph(
+          policy.tags.map(tag => topics[tag][0]).join(" · "),
+          "tags"
+        )
+      );
+
+      const heading = document.createElement("h3");
+      heading.textContent = policy.title;
+
+      article.append(heading);
+
+      const roleText = policy.role === "mayor"
+        ? "市長候選人"
+        : districtLabel(policy.district);
+
+      article.append(
+        paragraph(
+          policy.number + "號 " +
+          policy.person + "｜" + roleText,
+          "byline"
+        )
+      );
+
+      article.append(paragraph(policy.text));
+
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+
+      summary.textContent = "比較前，再多看一步";
+
+      details.append(
+        summary,
+        paragraph("本作追問：" + policy.question),
+        paragraph(
+          "此為競選承諾；本頁沒有確認已實施，" +
+          "或替可行性評分。"
+        )
+      );
+
+      article.append(details);
+
+      const sourceBox = document.createElement("div");
+      sourceBox.className = "card-source";
+
+      sourceBox.append(
+        external(
+          "閱讀來源：" + policy.source,
+          policy.url
+        )
+      );
+
+      article.append(sourceBox);
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "save";
+      button.dataset.policy = policy.id;
+
+      button.setAttribute(
+        "aria-pressed",
+        String(saved.has(policy.id))
+      );
+
+      button.textContent = saved.has(policy.id)
+        ? "已收藏 · 取消收藏"
+        : "收藏這項方案";
+
+      button.addEventListener("click", () => {
+        toggleSaved(policy.id);
+      });
+
+      article.append(button);
+
+      return article;
+    }
+
+    function fillCards(
+      elementId,
+      items,
+      emptyText,
+      inCollection = false
+    ) {
+      const box = $(elementId);
+      box.replaceChildren();
+
+      if (items.length === 0) {
+        box.append(paragraph(emptyText, "empty"));
+        return;
+      }
+
+      items.forEach(policy => {
+        box.append(createCard(policy, inCollection));
+      });
+    }
+
+    /* ========================================
+       四、需求篩選
+       ======================================== */
+
+    function renderPolicies() {
+      $("needs-status").textContent = chosen.size
+        ? "正在探索：" +
+          [...chosen].map(tag => topics[tag][0]).join("、")
+        : "正在探索全部收錄方案。";
+
+      document.querySelectorAll("[data-topic]").forEach(button => {
+        button.setAttribute(
+          "aria-pressed",
+          String(chosen.has(button.dataset.topic))
+        );
+      });
+
+      const mayorItems = policies.filter(
+        policy => policy.role === "mayor" && matches(policy)
+      );
+
+      fillCards(
+        "mayor-cards",
+        mayorItems,
+        "目前篩選下沒有收錄方案；" +
+        "可以清除篩選或閱讀完整公報。"
+      );
+
+      $("mayor-count").textContent =
+        "符合需求的市長方案：" + mayorItems.length + "項";
+
+      const councilItems = policies.filter(
+        policy =>
+          policy.role === "council" &&
+          policy.district === currentDistrict &&
+          matches(policy)
+      );
+
+      fillCards(
+        "council-cards",
+        councilItems,
+        currentDistrict
+          ? "這個選區目前沒有符合所選需求的摘選；" +
+            "這不代表候選人沒有相關政策。" +
+            "請閱讀完整公報，或清除需求篩選。"
+          : "請先選擇議員篇的行政區。"
+      );
+
+      $("council-count").textContent = currentDistrict
+        ? "本選區符合需求的摘選：" +
+          councilItems.length + "項"
+        : "選擇行政區後，再探索本區方案。";
+
+      if (preferencesGenerated) renderPreferences();
+    }
+
+    Object.entries(topics).forEach(([key, words]) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "need";
+      button.dataset.topic = key;
+      button.setAttribute("aria-pressed", "false");
+
+      const title = document.createElement("b");
+      title.textContent = words[0];
+
+      const subtitle = document.createElement("span");
+      subtitle.textContent = words[1];
+
+      button.append(title, subtitle);
+
+      button.addEventListener("click", () => {
+        if (chosen.has(key)) {
+          chosen.delete(key);
+        } else {
+          chosen.add(key);
+        }
+
+        renderPolicies();
+      });
+
+      $("needs-buttons").append(button);
+    });
+
+    function clearNeeds() {
+      chosen.clear();
+      renderPolicies();
+    }
+
+    $("reset-needs").addEventListener("click", clearNeeds);
+
+    document.querySelectorAll(".show-all").forEach(button => {
+      button.addEventListener("click", clearNeeds);
+    });
+
+    /* ========================================
+       五、選區對應
+       ======================================== */
+
+    Object.values(regions).flat().forEach(area => {
+      const option = document.createElement("option");
+
+      option.value = area;
+      option.textContent = area;
+
+      $("area").append(option);
+    });
+
+    function updateDistrict() {
+      currentDistrict = selectedDistrict();
+
+      const result = $("district-result");
+      result.replaceChildren();
+
+      if (currentDistrict) {
+        result.append(
+          paragraph(
+            "你的議員選區：" +
+            districtLabel(currentDistrict)
+          ),
+
+          external(
+            "閱讀本選區完整公報（含全部候選人）",
+            bulletin(currentDistrict)
+          )
+        );
+      } else {
+        result.textContent = "選擇後顯示對應選區。";
+      }
+
+      renderPolicies();
+      renderSaved();
+    }
+
+    $("area").addEventListener("change", updateDistrict);
+
+    $("elector-type").addEventListener(
+      "change",
+      updateDistrict
+    );
+
+    /* ========================================
+       六、收藏與下載
+       ======================================== */
+
+    function renderSaved() {
+      const allSaved = policies.filter(
+        policy => saved.has(policy.id)
+      );
+
+      fillCards(
+        "saved-mayor",
+        allSaved.filter(policy => policy.role === "mayor"),
+        "尚未收藏市長方案。",
+        true
+      );
+
+      fillCards(
+        "saved-council",
+        allSaved.filter(policy => policy.role === "council"),
+        "尚未收藏議員方案。",
+        true
+      );
+
+      $("nav-count").textContent = saved.size;
+
+      $("saved-count").textContent =
+        "已收藏" + saved.size + "項方案";
+
+      $("download").disabled = saved.size === 0;
+      $("clear-saved").disabled = saved.size === 0;
+      if (preferencesGenerated) renderPreferences();
+    }
+
+    function buildPreferenceSummary() {
+      const questions = {
+        job: "職缺適合哪些專長？培訓或實習後的就業與留任成果如何追蹤？",
+        pay: "薪資與工時如何改善？補助資格、期間與經費來源是否清楚？",
+        home: "租屋或住宅支持的資格、負擔與等待時間是否符合需求？",
+        startup: "創業資源如何申請？資金風險、輔導內容與後續成效如何公開？",
+        life: "照顧與通勤服務涵蓋哪些地區？費用、名額與實施時程是否清楚？"
+      };
+      const items = policies.filter(policy => saved.has(policy.id));
+      return Object.entries(topics).map(([key, labels]) => ({
+        key,
+        label: labels[0],
+        detail: labels[1],
+        selected: chosen.has(key),
+        count: items.filter(policy => policy.tags.includes(key)).length,
+        question: questions[key]
+      })).filter(row => row.selected || row.count > 0);
+    }
+
+    function renderPreferences() {
+      const rows = buildPreferenceSummary();
+      const box = $("preference-cards");
+      box.replaceChildren();
+      $("preference-result").hidden = false;
+      $("download-preferences").disabled = rows.length === 0;
+      $("generate-preferences").textContent = "重新生成議題摘要";
+
+      if (!rows.length) {
+        $("preference-intro").textContent = "你的議題摘要，從一個選擇開始。";
+        $("preference-status").textContent = "目前尚未勾選需求或收藏方案。";
+        box.append(paragraph("先到需求區勾選關注條件，或收藏想比較的方案。", "empty"));
+        const link = external("選擇我關注的需求", "#needs");
+        link.removeAttribute("target");
+        link.removeAttribute("rel");
+        box.append(link);
+        return;
+      }
+
+      $("preference-intro").textContent = "這次探索的議題包括：" +
+        rows.map(row => row.label).join("、") + "。";
+      $("preference-status").textContent = "依目前 " + chosen.size +
+        " 項需求與 " + saved.size + " 項收藏整理；更改選擇後會自動更新。";
+
+      rows.forEach(row => {
+        const card = document.createElement("article");
+        card.className = "card";
+        const heading = document.createElement("h3");
+        heading.textContent = row.label;
+        card.append(heading, paragraph(row.detail, "tags"),
+          paragraph(row.selected ? "你目前勾選的需求" : "出現在你的收藏方案中"),
+          paragraph("相關收藏：" + row.count + " 項方案"),
+          paragraph("投票前可以追問：" + row.question));
+        box.append(card);
+      });
+    }
+
+    $("generate-preferences").addEventListener("click", () => {
+      preferencesGenerated = true;
+      renderPreferences();
+    });
+
+    $("download-preferences").addEventListener("click", () => {
+      const rows = buildPreferenceSummary();
+      if (!rows.length) return;
+      const lines = ["下一站，回家？｜我的投票議題偏好",
+        "依目前勾選需求與收藏方案整理；此摘要不代表候選人或政黨支持意向。",
+        "需求：" + chosen.size + " 項；收藏：" + saved.size + " 項。",
+        "同一方案可計入多個議題，項數不代表重視程度；含其他選區收藏。", ""];
+      rows.forEach(row => lines.push(row.label + "｜" + row.detail,
+        "目前勾選需求：" + (row.selected ? "是" : "否"),
+        "相關收藏：" + row.count + " 項方案",
+        "投票前可以追問：" + row.question, ""));
+      const blob = new Blob(["\uFEFF" + lines.join("\n")], {type: "text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "我的投票議題偏好.txt";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+    function toggleSaved(id) {
+      if (saved.has(id)) {
+        saved.delete(id);
+      } else {
+        saved.add(id);
+      }
+
+      document.querySelectorAll("[data-policy]").forEach(button => {
+        const selected = saved.has(button.dataset.policy);
+
+        button.textContent = selected
+          ? "已收藏 · 取消收藏"
+          : "收藏這項方案";
+
+        button.setAttribute(
+          "aria-pressed",
+          String(selected)
+        );
+
+        button.closest(".card").classList.toggle(
+          "selected",
+          selected
+        );
+      });
+
+      renderSaved();
+    }
+
+    $("clear-saved").addEventListener("click", () => {
+      saved.clear();
+      renderPolicies();
+      renderSaved();
+    });
+
+    $("download").addEventListener("click", () => {
+      const items = policies.filter(
+        policy => saved.has(policy.id)
+      );
+
+      if (!items.length) return;
+
+      const lines = [
+        "下一站，回家？｜我的返鄉政策收藏",
+        "資料查閱：2026/11/25",
+        "此清單非投票推薦；議員內容為主題摘選。",
+        "目前議員選區：" +
+          (
+            currentDistrict
+              ? districtLabel(currentDistrict)
+              : "尚未選擇"
+          ),
+        ""
+      ];
+
+      for (const role of ["mayor", "council"]) {
+        lines.push(
+          role === "mayor"
+            ? "【市長方案】"
+            : "【議員方案】"
+        );
+
+        for (const policy of items.filter(
+          item => item.role === role
+        )) {
+          lines.push(
+            policy.number + "號 " + policy.person +
+              "｜" +
+              (
+                policy.role === "mayor"
+                  ? "市長"
+                  : districtLabel(policy.district)
+              ),
+            policy.title,
+            policy.text,
+            "追問：" + policy.question,
+            "來源：" + policy.url,
+            ""
+          );
+        }
+      }
+
+      const blob = new Blob(
+        ["\uFEFF" + lines.join("\n")],
+        { type: "text/plain;charset=utf-8" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "我的返鄉政策清單.txt";
+
+      document.body.append(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+    $("mayor-original").href = mayorPDF;
+    $("source-mayor").href = mayorPDF;
+    $("source-council").href = councilIndex;
+
+    renderPolicies();
+    renderSaved();
+
+    /* 青年就業質詢摘選：獨立於政見與選區篩選。 */
+    const inquiryRecords = [
+      {
+        member: "陳美雅", date: "2025-10-31",
+        topic: "職涯與就業媒合", meeting: "財經部門質詢",
+        title: "青年就業與創業，能否有更多產業選擇？",
+        summary: "關注初次求職及長期待業青年的協助，要求跨局處合作，並追問就業與創業機會是否過度集中於餐飲業。",
+        keywords: "返鄉 工作 失業 青年局 經發局 多元職涯",
+        slug: "kaohsiung-e90c1f272e-6"
+      },
+      {
+        member: "李雅靜", date: "2025-04-30",
+        topic: "創業資源", meeting: "教育部門質詢",
+        title: "創業基地分散，資源如何整合？",
+        summary: "針對文化局、青年局與經發局的創業基地使用及資源分散問題，要求三局協調，並訂定共創基地的外借規則。",
+        keywords: "返鄉 工作 青創 空間 閒置 基地",
+        slug: "kaohsiung-49b6b8e53d-8"
+      },
+      {
+        member: "林義迪", date: "2025-04-24",
+        topic: "在地工作與產業", meeting: "財經部門質詢",
+        title: "旗美能否提供讓青年回鄉的工作？",
+        summary: "提出在旗美地區發展軟體科學園區的構想，希望增加東高雄的就業機會，吸引青年回鄉工作。",
+        keywords: "返鄉 留鄉 回鄉 旗山 美濃 東九區 產業 園區",
+        slug: "kaohsiung-bbbd21c07b-9"
+      },
+      {
+        member: "李雅靜", date: "2025-01-17",
+        topic: "交通與跨域就業", meeting: "交錯討論（多人發言）",
+        title: "跨域找工作，交通與就業服務如何支持？",
+        summary: "詢問青年跨域就業交通補助的預算內容，並要求評估在鳳山設置訓練就業中心。本卡摘述李雅靜的發言。",
+        keywords: "返鄉 工作 通勤 交通補助 勞工局 鳳山",
+        slug: "kaohsiung-5af9d83df1-26"
+      },
+      {
+        member: "陳美雅", date: "2025-01-16",
+        topic: "職涯與就業媒合", meeting: "交錯討論",
+        title: "原住民青年能否接觸更多職涯路徑？",
+        summary: "詢問原住民青年的就業類型，建議從高中階段就協助學生接觸不同產業與就業機會。",
+        keywords: "返鄉 工作 原鄉 部落 學生 職涯 媒合",
+        slug: "kaohsiung-b91c77c58d-26"
+      },
+      {
+        member: "鄭孟洳", date: "2024-05-02",
+        topic: "職涯與就業媒合", meeting: "社政部門質詢",
+        title: "就業輔導政策，青年真的知道嗎？",
+        summary: "追問青年職得好評計畫的觸及與申請情況，建議勞工局和青年局合作，把就業輔導資訊帶進校園。",
+        keywords: "返鄉 工作 求職 失業 宣傳 青年職得好評 補助",
+        slug: "kaohsiung-a211d387ba-4"
+      },
+      {
+        member: "陳美雅", date: "2024-04-09",
+        topic: "職涯與就業媒合", meeting: "財經部門質詢",
+        title: "產業進駐之後，青年實際媒合了多少工作？",
+        summary: "追問台積電徵才的實際媒合成果，以及青年職涯規劃是否銜接半導體產業需求，要求局處協作並提供資料。",
+        keywords: "返鄉 工作 台積電 半導體 科技 人才 經發局 青年局",
+        slug: "kaohsiung-b10e39d8f9-5"
+      }
+    ];
+
+    function filterInquiries(keyword, member, topic) {
+      const words = keyword.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+      return inquiryRecords.filter(record => {
+        const text = [record.member, record.date, record.topic, record.meeting,
+          record.title, record.summary, record.keywords].join(" ").toLocaleLowerCase();
+        return (!member || record.member === member) &&
+          (!topic || record.topic === topic) &&
+          words.every(word => text.includes(word));
+      });
+    }
+
+    function renderInquiries() {
+      const results = filterInquiries(
+        $("inquiry-keyword").value,
+        $("inquiry-member").value,
+        $("inquiry-topic").value
+      );
+      const container = $("inquiry-cards");
+      container.replaceChildren();
+      $("inquiry-count").textContent = "找到 " + results.length +
+        " 筆質詢｜本站共摘選 " + inquiryRecords.length + " 筆，依日期由新到舊排列";
+
+      if (!results.length) {
+        container.append(paragraph(
+          "本站摘選中沒有符合的紀錄。請減少關鍵字、清除條件，或前往觀測站查詢更多內容。",
+          "empty"
+        ));
+        return;
+      }
+
+      results.forEach(record => {
+        const card = document.createElement("article");
+        card.className = "card inquiry-card";
+        const title = document.createElement("h3");
+        title.textContent = record.title;
+        const byline = paragraph(record.member + "｜" + record.meeting + "｜", "byline");
+        const date = document.createElement("time");
+        date.dateTime = record.date;
+        date.textContent = record.date.replaceAll("-", "/");
+        byline.append(date);
+        const source = paragraph("", "card-source");
+        source.append(external("閱讀觀測站逐字稿與回應",
+          "https://lawmaker.twreporter.org/council/a/" + record.slug));
+        card.append(paragraph(record.topic, "badge"), title, byline,
+          paragraph(record.summary), paragraph("本站整理摘要，非逐字引述。", "small"), source);
+        container.append(card);
+      });
+    }
+
+    $("inquiry-form").addEventListener("submit", event => {
+      event.preventDefault();
+      renderInquiries();
+    });
+    $("inquiry-keyword").addEventListener("input", renderInquiries);
+    $("inquiry-member").addEventListener("change", renderInquiries);
+    $("inquiry-topic").addEventListener("change", renderInquiries);
+    $("inquiry-form").addEventListener("reset", () => {
+      // 原生 reset 事件先發生，下一個微任務再讀取已還原的表單值。
+      queueMicrotask(renderInquiries);
+    });
+    renderInquiries();
+
+    /* ========================================
+       七、影片與音樂
+       直接讀取剪好的train.mp4，不跳轉起訖時間。
+       ======================================== */
+
+    const video = $("video");
+    const music = $("music");
+
+    const textLines = [
+      ...document.querySelectorAll(".hero h1 span")
+    ];
+
+    const MAX_VOLUME = 0.55;
+    const TEXT_TIMES = [1, 4, 7];
+    let soundEnabled = false;
+    let musicMutedByReader = false;
+    let musicAttempt = 0;
+
+    function updateMediaButtons() {
+      $("play").textContent = video.paused ? "播放影片" : "暫停影片";
+      $("sound").textContent = soundEnabled ? "關閉音樂" : "開啟音樂";
+      $("sound").setAttribute("aria-pressed", String(soundEnabled));
+    }
+
+    function updateOpeningText() {
+      textLines.forEach((line, index) => {
+        line.classList.toggle("visible", video.ended || video.currentTime >= TEXT_TIMES[index]);
+      });
+    }
+
+    // 背景音樂使用自己的播放進度，不隨影片跳轉、暫停或淡出。
+    async function startMusic() {
+      const token = ++musicAttempt;
+      music.volume = MAX_VOLUME;
+      try {
+        await music.play();
+        if (token !== musicAttempt) return;
+        $("media-status").textContent = "背景音樂播放中";
+      } catch (error) {
+        if (token !== musicAttempt) return;
+        soundEnabled = false;
+        $("media-status").textContent = error.name === "NotAllowedError"
+          ? "音樂自動播放受限，可點選開啟音樂。"
+          : "音樂無法播放，請確認 music.m4a 或改用 Chrome／Safari。";
+      }
+      updateMediaButtons();
+    }
+
+    function pauseVideo() {
+      video.pause();
+      updateMediaButtons();
+    }
+
+    async function startMedia() {
+      if (video.ended) video.currentTime = 0;
+      const videoJob = video.play();
+      if (soundEnabled && music.paused) startMusic();
+      try {
+        await videoJob;
+      } catch {
+        showVideoError();
+      }
+      updateMediaButtons();
+    }
+
+    $("sound").addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      musicMutedByReader = !soundEnabled;
+      if (soundEnabled) {
+        startMusic();
+      } else {
+        musicAttempt++;
+        music.pause();
+        $("media-status").textContent = "音樂已關閉";
+      }
+      updateMediaButtons();
+    });
+
+    $("play").addEventListener("click", () => {
+      if (video.paused) {
+        soundEnabled = !musicMutedByReader;
+        startMedia();
+      } else {
+        pauseVideo();
+      }
+    });
+
+    $("replay").addEventListener("click", () => {
+      pauseVideo();
+      video.currentTime = 0;
+      updateOpeningText();
+      startMedia();
+    });
+
+    video.addEventListener("pause", updateMediaButtons);
+    video.addEventListener("play", updateMediaButtons);
+    video.addEventListener("timeupdate", updateOpeningText);
+    video.addEventListener("ended", () => {
+      textLines.forEach(line => line.classList.add("visible"));
+      updateMediaButtons();
+    });
+
+    function showVideoError() {
+      textLines.forEach(line => line.classList.add("visible"));
+      $("media-status").textContent = "影片無法播放，可先往下探索政策。";
+    }
+    video.addEventListener("error", showVideoError);
+    video.querySelector("source").addEventListener("error", showVideoError);
+
+    function showMusicError() {
+      musicAttempt++;
+      soundEnabled = false;
+      music.pause();
+      updateMediaButtons();
+      $("media-status").textContent = "音樂無法播放，請確認 music.m4a。";
+    }
+    music.addEventListener("error", showMusicError);
+    music.querySelector("source").addEventListener("error", showMusicError);
+
+    // 往下閱讀或切換分頁時僅暫停開場影片，音樂繼續循環播放。
+    new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) pauseVideo();
+    }, { threshold: 0 }).observe($("opening"));
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) pauseVideo();
+    });
+
+    // 初次進入先等待讀者點擊播放影片，再一併啟動背景音樂。
+    updateMediaButtons();
+
+    /* ========================================
+       八、閱讀進度
+       ======================================== */
+
+    function updateProgress() {
+      const page = document.documentElement;
+
+      const total =
+        page.scrollHeight - page.clientHeight;
+
+      const percentage = total
+        ? page.scrollTop / total * 100
+        : 0;
+
+      $("progress").style.width =
+        percentage + "%";
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateProgress,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "resize",
+      updateProgress
+    );
+
+    updateProgress();
+  </script>
+</body>
+</html>
